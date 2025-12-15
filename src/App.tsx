@@ -1,25 +1,21 @@
-import { useState } from 'react'
-import '@/index.css'
+import "@/index.css";
+import { Route, Routes } from "react-router-dom";
+import MainLayout from "./components/MainLayout";
+import { About, Contact, Home, News, Transparency } from "./components/pages";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Routes>
+      <Route element={<MainLayout />}>
+        <Route index element={<Home />} />
+        <Route path="/sobre" element={<About />} />
+        <Route path="/contato" element={<Contact />} />
+        <Route path="/noticias" element={<News />} />
+        <Route path="/transparencia" element={<Transparency />} />
+        {/* <Route path="/profile/:id/*" element={<Profile />} /> */}
+      </Route>
+    </Routes>
+  );
 }
 
-export default App
+export default App;
