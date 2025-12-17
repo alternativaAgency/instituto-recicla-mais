@@ -5,6 +5,7 @@ import useMeasure from "react-use-measure";
 
 const CARD_WIDTH = 350;
 const CARD_HEIGHT = 350;
+const CARD_WIDTH_MOBILE = 280;
 const MARGIN = 20;
 const CARD_SIZE = CARD_WIDTH + MARGIN;
 
@@ -41,10 +42,10 @@ const CardCarousel = () => {
 
   return (
     <section className="bg-limpeza" ref={ref}>
-      <div className="relative overflow-hidden p-4">
+      <div className="relative overflow-hidden p-2 sm:p-4">
         {/* CARDS */}
         <div className="mx-auto max-w-6xl">
-          <p className="mb-4 text-2xl text-mata-950 font-semibold">
+          <p className="mb-3 sm:mb-4 text-xl sm:text-2xl text-mata-950 font-semibold px-2 sm:px-0">
             Artigos <span className="text-mata-600">mais lidos..</span>
           </p>
           <motion.div
@@ -66,7 +67,7 @@ const CardCarousel = () => {
             animate={{
               x: CAN_SHIFT_LEFT ? "0%" : "-100%",
             }}
-            className="absolute left-0 top-[60%] z-30 rounded-r-xl bg-mata-100/30 p-3 pl-2 text-4xl text-white backdrop-blur-sm transition-[padding] hover:pl-3"
+            className="absolute left-0 top-[50%] sm:top-[60%] z-30 rounded-r-xl bg-mata-100/30 p-2 sm:p-3 pl-2 text-2xl sm:text-3xl md:text-4xl text-white backdrop-blur-sm transition-[padding] hover:pl-3"
             onClick={shiftLeft}
             >
             <FiChevronLeft />
@@ -76,7 +77,7 @@ const CardCarousel = () => {
             animate={{
               x: CAN_SHIFT_RIGHT ? "0%" : "100%",
             }}
-            className="absolute right-0 top-[60%] z-30 rounded-l-xl bg-slate-100/30 p-3 pr-2 text-4xl text-white backdrop-blur-sm transition-[padding] hover:pr-3"
+            className="absolute right-0 top-[50%] sm:top-[60%] z-30 rounded-l-xl bg-slate-100/30 p-2 sm:p-3 pr-2 text-2xl sm:text-3xl md:text-4xl text-white backdrop-blur-sm transition-[padding] hover:pr-3"
             onClick={shiftRight}
           >
             <FiChevronRight />
@@ -89,10 +90,10 @@ const CardCarousel = () => {
 
 const Card = ({ url, category, title, description }: ItemType) => {
   return (
-    <div
-      className="relative shrink-0 cursor-pointer rounded-2xl bg-white shadow-md transition-all hover:scale-[1.015] hover:shadow-xl"
+      <div
+      className="relative shrink-0 cursor-pointer rounded-2xl bg-white shadow-md transition-all hover:scale-[1.015] hover:shadow-xl sm:w-[320px] md:w-[350px]"
       style={{
-        width: CARD_WIDTH,
+        width: `${CARD_WIDTH_MOBILE}px`,
         height: CARD_HEIGHT,
         marginRight: MARGIN,
         backgroundImage: `url(${url})`,
@@ -104,8 +105,8 @@ const Card = ({ url, category, title, description }: ItemType) => {
         <span className="text-xs font-semibold uppercase text-mata-50">
           {category}
         </span>
-        <p className="my-2 text-3xl font-bold">{title}</p>
-        <p className="text-lg text-slate-300">{description}</p>
+        <p className="my-2 text-2xl sm:text-3xl font-bold">{title}</p>
+        <p className="text-base sm:text-lg text-slate-300">{description}</p>
       </div>
     </div>
   );

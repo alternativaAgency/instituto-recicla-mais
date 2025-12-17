@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import Map, { Source, Layer, Popup } from 'react-map-gl/maplibre';
 import type { ViewState, MapRef } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 interface MapSettings {
   scrollZoom: boolean;
@@ -27,10 +28,19 @@ interface CityData {
   trashRecycledKg: number;
 }
 
-const initialViewState: ViewState = {
-    longitude: -45.3,
-    latitude: -19.2,
-    zoom: 6,
+const initialViewStateDesktop: ViewState = {
+    longitude: -49.3,
+    latitude: -16.2,
+    zoom: 5,
+    pitch: 55,
+    bearing: -25,
+    padding: { top: 0, bottom: 0, left: 0, right: 0 }
+};
+
+const initialViewStateMobile: ViewState = {
+    longitude: -49.3,
+    latitude: -16.2,
+    zoom: 3,
     pitch: 45,
     bearing: -25,
     padding: { top: 0, bottom: 0, left: 0, right: 0 }
@@ -77,11 +87,84 @@ const cities: CityData[] = [
     latitude: -15.7942,
     jobsDone: 156,
     trashRecycledKg: 82000
+  },
+  {
+    id: 6,
+    cityName: 'Boa Vista',
+    longitude: -60.6719,
+    latitude: 2.8197,
+    jobsDone: 0,
+    trashRecycledKg: 0
+  },
+  {
+    id: 7,
+    cityName: 'Ji-Paraná',
+    longitude: -61.9411,
+    latitude: -10.8853,
+    jobsDone: 0,
+    trashRecycledKg: 0
+  },
+  {
+    id: 8,
+    cityName: 'Brumado',
+    longitude: -41.6653,
+    latitude: -14.2036,
+    jobsDone: 0,
+    trashRecycledKg: 0
+  },
+  {
+    id: 9,
+    cityName: 'Várzea Grande',
+    longitude: -56.1322,
+    latitude: -15.6467,
+    jobsDone: 0,
+    trashRecycledKg: 0
+  },
+  {
+    id: 10,
+    cityName: 'Conselheiro Pena',
+    longitude: -41.4722,
+    latitude: -19.1789,
+    jobsDone: 0,
+    trashRecycledKg: 0
+  },
+  {
+    id: 11,
+    cityName: 'Blumenau',
+    longitude: -49.0661,
+    latitude: -26.9194,
+    jobsDone: 0,
+    trashRecycledKg: 0
+  },
+  {
+    id: 12,
+    cityName: 'Itapema',
+    longitude: -48.6128,
+    latitude: -27.0908,
+    jobsDone: 0,
+    trashRecycledKg: 0
+  },
+  {
+    id: 13,
+    cityName: 'Juazeiro do Norte',
+    longitude: -39.3153,
+    latitude: -7.2131,
+    jobsDone: 0,
+    trashRecycledKg: 0
+  },
+  {
+    id: 14,
+    cityName: 'Belém',
+    longitude: -48.5044,
+    latitude: -1.4558,
+    jobsDone: 0,
+    trashRecycledKg: 0
   }
 ];
 
 export default function Globe() {
   const mapRef = useRef<MapRef>(null);
+  const isMobile = useIsMobile();
   const [settings] = useState<MapSettings>({
     scrollZoom: false,
     boxZoom: false,
@@ -96,12 +179,29 @@ export default function Globe() {
     minPitch: 0,
     maxPitch: 85
   });
-  const [viewState, setViewState] = useState<ViewState>(initialViewState);
+  // Initialize with desktop, then update when isMobile is determined
+  const [viewState, setViewState] = useState<ViewState>(initialViewStateDesktop);
+  
+  // Update viewState when isMobile changes (after initial detection)
+  // This is necessary because useIsMobile updates asynchronously after mount
+  useEffect(() => {
+    setViewState(isMobile ? initialViewStateMobile : initialViewStateDesktop);
+  }, [isMobile]);
+  
   const [currentTooltipIndex, setCurrentTooltipIndex] = useState(0);
   const [anchorPositions, setAnchorPositions] = useState<Record<number, 'top' | 'bottom' | 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center'>>({});
   
+  const mobileBorderRadius = '78% 67% 100% 56% / 96% 99% 60% 50%';
+  const desktopBorderRadius = '90% 56% 100% 39% / 85% 53% 60% 49%';
+  const borderRadius = isMobile ? mobileBorderRadius : desktopBorderRadius;
+  
   // Always show all cities for tooltips
   const visibleCities = cities;
+
+  // Ensure we always have a current city to display (moved up for useEffect dependency)
+  const currentCity = visibleCities.length > 0 
+    ? visibleCities[currentTooltipIndex % visibleCities.length] 
+    : cities[0];
 
   // Calculate anchor positions based on map bounds
   useEffect(() => {
@@ -193,19 +293,19 @@ export default function Globe() {
     return () => clearInterval(interval);
   }, [visibleCities.length]);
 
-  // Ensure we always have a current city to display
-  const currentCity = visibleCities.length > 0 
-    ? visibleCities[currentTooltipIndex % visibleCities.length] 
-    : cities[0];
-
-  // Format number with thousands separator
-  const formatNumber = (num: number): string => {
-    return num.toLocaleString('pt-BR');
-  };
+  // Format number with thousands separator (kept for future use)
+  // const formatNumber = (num: number): string => {
+  //   return num.toLocaleString('pt-BR');
+  // };
 
   // Get anchor position for current city
   const getAnchorPosition = (city: CityData): 'top' | 'bottom' | 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center' => {
-    return anchorPositions[city.id] || 'bottom';
+    const calculated = anchorPositions[city.id] || 'bottom';
+    // Prefer side positions (left/right), otherwise use bottom
+    if (calculated === 'left' || calculated === 'right') {
+      return calculated;
+    }
+    return 'bottom';
   };
 
   return (
@@ -220,49 +320,49 @@ export default function Globe() {
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-mata-300 rounded-full blur-3xl"></div>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-[0.7fr_2.3fr] min-h-[600px] md:min-h-[calc(100dvh-5rem)] max-h-[800px] relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-[0.7fr_2.3fr] min-h-[400px] sm:min-h-[500px] md:min-h-[600px] lg:min-h-[calc(100dvh-5rem)] max-h-[800px] md:max-h-none relative z-10">
         {/* Left Column - Content */}
-        <div className="flex flex-col justify-center px-6 py-10 md:px-8 md:py-12 lg:px-12 relative">
+        <div className="flex flex-col justify-center px-6 py-8 sm:px-6 sm:py-8 md:px-8 md:py-12 lg:px-12 relative">
           {/* Subtle accent line */}
           <div className="absolute left-0 top-0 bottom-0 w-px bg-linear-to-b from-transparent via-mata-400/30 to-transparent"></div>
           
-          <div className="mb-8 inline-block w-fit group">
-            <span className="inline-block rounded-full bg-linear-to-r from-mata-400 to-mata-500 px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-mata-500/20 transition-transform duration-300 group-hover:scale-105">
+          <div className="mb-6 sm:mb-6 md:mb-8 inline-block w-fit group">
+            <span className="inline-block rounded-full bg-linear-to-r from-mata-400 to-mata-500 px-5 py-2.5 sm:px-5 sm:py-2.5 text-xs sm:text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-mata-500/20 transition-transform duration-300 group-hover:scale-105">
               Faça a Diferença
             </span>
           </div>
           
-          <h2 className="mb-8 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
-            <span className="text-white block mb-2">Nossos</span>
+          <h2 className="mb-6 sm:mb-6 md:mb-8 text-5xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
+            <span className="text-white block mb-2 sm:mb-2">Nossos</span>
             <span className="text-transparent bg-clip-text bg-linear-to-r from-mata-300 via-mata-400 to-mata-500 block">
               Trabalhos
             </span>
           </h2>
           
-          <p className="max-w-lg text-base leading-relaxed text-white/90 md:text-lg mb-8">
+          <p className="max-w-lg text-base sm:text-base md:text-lg leading-relaxed text-white/90 mb-6 sm:mb-6 md:mb-8">
             Acompanhe nosso impacto nas cidades onde transformamos resíduos em resultados sustentáveis através de trabalhos realizados em todo o país.
           </p>
           
           {/* Stats or additional info */}
-          <div className="flex flex-wrap gap-6 mt-4">
+          <div className="flex flex-wrap gap-4 sm:gap-6 mt-4 sm:mt-4">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-mata-400 animate-pulse"></div>
-              <span className="text-sm text-white/70 font-medium">Impacto Real</span>
+              <span className="text-sm sm:text-sm text-white/70 font-medium">Impacto Real</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-mata-400 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-              <span className="text-sm text-white/70 font-medium">Sustentabilidade</span>
+              <span className="text-sm sm:text-sm text-white/70 font-medium">Sustentabilidade</span>
             </div>
           </div>
         </div>
 
-        <div className="relative flex items-center justify-center overflow-visible p-2 md:p-4">
+        <div className="relative flex items-center justify-center overflow-visible p-1 sm:p-2 md:p-4 h-[300px] sm:h-[400px] md:h-[500px] lg:h-auto">
 
           {/* Map container with blob border-radius */}
           <div 
             className="relative w-full h-full z-0 overflow-hidden"
             style={{
-              borderRadius: '90% 56% 100% 39% / 85% 53% 60% 49%',
+              borderRadius: borderRadius,
             }}
           >
           <Map
@@ -276,7 +376,7 @@ export default function Globe() {
               height: '100%', 
               position: 'relative', 
               zIndex: 1,
-              borderRadius: '90% 56% 100% 39% / 85% 53% 60% 49%',
+              borderRadius: borderRadius,
               overflow: 'hidden'
             }}
             attributionControl={false}
@@ -341,114 +441,57 @@ export default function Globe() {
                 closeOnClick={false}
                 anchor={getAnchorPosition(currentCity)}
                 offset={[0, -10]}
-                maxWidth="380px"
+                maxWidth={isMobile ? "280px" : "380px"}
               >
                 <div 
                   key={currentCity.id}
                   style={{ 
                     padding: 0,
-                    backgroundColor: '#ffffff',
-                    borderRadius: '8px',
-                    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1)',
+                    backgroundColor: 'transparent',
                     fontFamily: 'Montserrat, system-ui, -apple-system, sans-serif',
-                    overflow: 'hidden',
-                    border: '1px solid rgba(63, 168, 110, 0.1)',
+                    overflow: 'visible',
                     animation: 'popupFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards'
                   }}
                 >
-                  {/* Compact single line layout */}
+                  {/* Enhanced Tooltip Design */}
                   <div style={{ 
+                    position: 'relative',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '10px',
-                    padding: '8px 12px',
-                    background: 'linear-gradient(135deg, #3fa86e 0%, #2f8a58 100%)'
+                    justifyContent: 'center',
+                    padding: '10px 18px',
+                    background: 'linear-gradient(135deg, #3fa86e 0%, #2f8a58 100%)',
+                    borderRadius: '12px',
+                    boxShadow: '0 8px 24px rgba(63, 168, 110, 0.3), 0 4px 12px rgba(0, 0, 0, 0.15)',
+                    border: 'none',
+                    backdropFilter: 'blur(10px)',
+                    overflow: 'visible'
                   }}>
+                    {/* Shine effect overlay */}
+                    <div style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: '50%',
+                      background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%)',
+                      borderRadius: '12px 12px 0 0',
+                      pointerEvents: 'none'
+                    }} />
+                    
                     {/* City Name */}
                     <div style={{
-                      fontSize: '13px',
+                      fontSize: '14px',
                       fontWeight: '700',
                       color: '#ffffff',
                       whiteSpace: 'nowrap',
-                      flexShrink: 0
+                      flexShrink: 0,
+                      textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
+                      letterSpacing: '0.3px',
+                      position: 'relative',
+                      zIndex: 1
                     }}>
                       {currentCity.cityName}
-                    </div>
-                    
-                    {/* Divider */}
-                    <div style={{
-                      width: '1px',
-                      height: '16px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.25)',
-                      flexShrink: 0
-                    }} />
-                    
-                    {/* Jobs Done - Compact */}
-                    <div style={{ 
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '4px',
-                      flexShrink: 0
-                    }}>
-                      <span style={{
-                        fontSize: '9px',
-                        fontWeight: '600',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.3px',
-                        color: 'rgba(255, 255, 255, 0.75)'
-                      }}>
-                        Trabalhos:
-                      </span>
-                      <span style={{
-                        fontSize: '14px',
-                        fontWeight: '700',
-                        color: '#ffffff',
-                        lineHeight: '1'
-                      }}>
-                        {formatNumber(currentCity.jobsDone)}
-                      </span>
-                    </div>
-                    
-                    {/* Divider */}
-                    <div style={{
-                      width: '1px',
-                      height: '16px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.25)',
-                      flexShrink: 0
-                    }} />
-                    
-                    {/* Recycled Trash - Compact */}
-                    <div style={{ 
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '4px',
-                      flexShrink: 0
-                    }}>
-                      <span style={{
-                        fontSize: '9px',
-                        fontWeight: '600',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.3px',
-                        color: 'rgba(255, 255, 255, 0.75)'
-                      }}>
-                        Reciclado:
-                      </span>
-                      <span style={{
-                        fontSize: '14px',
-                        fontWeight: '700',
-                        color: '#ffffff',
-                        lineHeight: '1',
-                        display: 'flex',
-                        alignItems: 'baseline',
-                        gap: '2px'
-                      }}>
-                        {formatNumber(currentCity.trashRecycledKg)}
-                        <span style={{
-                          fontSize: '10px',
-                          fontWeight: '500',
-                          color: 'rgba(255, 255, 255, 0.9)'
-                        }}>kg</span>
-                      </span>
                     </div>
                   </div>
                 </div>
@@ -461,7 +504,7 @@ export default function Globe() {
           <div 
             className="absolute inset-0 w-full h-full pointer-events-none z-30"
             style={{
-              borderRadius: '90% 56% 100% 39% / 85% 53% 60% 49%',
+              borderRadius: borderRadius,
               border: '2px solid #3fa86e',
               opacity: 0.9,
             }}

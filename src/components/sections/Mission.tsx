@@ -9,8 +9,8 @@ import type { LogoItem } from "@/constants/missionLogos";
 
 const NeuHero = () => {
   return (
-    <section className="overflow-hidden py-12 md:py-24">
-      <div className="relative mx-auto flex max-w-6xl flex-col items-center justify-center rounded-t-2xl bg-white/95 backdrop-blur-sm px-8 pb-48 pt-12 shadow-xl md:px-12 md:pt-16">
+    <section className="overflow-hidden py-8 sm:py-12 md:py-24">
+      <div className="relative mx-auto flex max-w-6xl flex-col items-center justify-center rounded-t-2xl bg-white/95 backdrop-blur-sm px-4 sm:px-6 md:px-8 lg:px-12 pb-96 sm:pb-[22rem] pt-8 sm:pt-10 md:pt-12 lg:pt-16 shadow-xl">
         <Copy />
         <Mission />
       </div>
@@ -26,33 +26,33 @@ const Copy = () => {
     <>
       <div className="mb-1.5 rounded-full bg-zinc-600">
         <a
-          href="#"
+          href="https://www.instagram.com/institutoreciclamais/"
           target="_blank"
           rel="nofollow"
-          className="flex origin-top-left items-center rounded-full border border-zinc-900 bg-white p-0.5 text-sm transition-transform hover:-rotate-2"
+          className="flex origin-top-left items-center rounded-full border border-zinc-900 bg-white p-0.5 text-xs sm:text-sm transition-transform hover:-rotate-2"
         >
-          <span className="rounded-full bg-mata-600 px-2 py-0.5 font-medium uppercase text-white">
+          <span className="rounded-full bg-mata-600 px-1 py-0.5 sm:px-2 text-xs sm:text-sm font-medium uppercase text-white">
             Olá!
           </span>
-          <span className="ml-1.5 mr-1 inline-block">
+          <span className="ml-1.5 mr-1 inline-block text-xs sm:text-sm">
             Veja no que estamos trabalhando!
           </span>
-          <FiArrowUpRight className="mr-2 inline-block" />
+          <FiArrowUpRight className="mr-2 inline-block h-3 w-3 sm:h-4 sm:w-4" />
         </a>
       </div>
-      <h1 className="max-w-4xl text-center text-4xl font-black leading-[1.15] md:text-6xl md:leading-[1.15]">
+      <h2 className="max-w-4xl text-center text-2xl sm:text-4xl md:text-6xl font-black leading-[1.15] mb-4 sm:mb-6 md:mb-8">
         Juntos, construímos soluções reais para um futuro sustentável
-      </h1>
-      <p className="mx-auto my-4 max-w-3xl text-center text-base leading-relaxed md:my-6 md:text-xl md:leading-relaxed">
+      </h2>
+      <p className="mx-auto my-4 sm:my-5 md:my-6 max-w-3xl text-center text-xs sm:text-base md:text-lg lg:text-xl leading-relaxed">
         Atuamos diretamente na redução de impactos socioambientais por meio de 
         ações transparentes, mensuráveis e acessíveis. Sua participação viabiliza mudanças concretas.
       </p>
       <Link
-        to="/contato"
-        className="group flex px-4 py-2.5 items-center gap-2 rounded-full bg-mata-600 text-white transition-all duration-300 ease-in-out hover:bg-mata-700 active:bg-mata-800"
+        to="https://www.instagram.com/institutoreciclamais/"
+        className="group flex px-2.5 py-1.5 sm:px-4 sm:py-2.5 items-center gap-1.5 sm:gap-2 rounded-full bg-mata-600 text-white transition-all duration-300 ease-in-out hover:bg-mata-700 active:bg-mata-800 text-xs sm:text-base"
       >
         <span className="font-medium">Saiba como participar</span>
-        <FiArrowUpRight className="h-4 w-4" />
+        <FiArrowUpRight className="h-3 w-3 sm:h-4 sm:w-4" />
       </Link>
     </>
   );
@@ -75,46 +75,60 @@ const shuffle = (array: (typeof squareData)[0][]) => {
   return array;
 };
 
+// Position controls CSS backgroundPosition to determine which part of the image is displayed
+// Options: "center", "top", "bottom", "left", "right", "top left", "top right", "bottom left", "bottom right"
+// Or use percentages like "50% 50%", "30% 70%", etc.
+// If position is not specified, defaults to "center"
 const squareData = [
   {
     id: 1,
     src: "https://images.unsplash.com/photo-1547347298-4074fc3086f0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+    position: "center", // Controls which part of the image is displayed
   },
   {
     id: 2,
     src: "https://images.unsplash.com/photo-1510925758641-869d353cecc7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    position: "center",
   },
   {
     id: 3,
-    src: "https://images.unsplash.com/photo-1629901925121-8a141c2a42f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    src: "https://images.pexels.com/photos/3480494/pexels-photo-3480494.jpeg",
+    position: "center",
   },
   {
     id: 4,
     src: "https://images.unsplash.com/photo-1580238053495-b9720401fd45?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    position: "center",
   },
   {
     id: 5,
-    src: "https://images.unsplash.com/photo-1569074187119-c87815b476da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1325&q=80",
+    src: "https://images.pexels.com/photos/3735208/pexels-photo-3735208.jpeg",
+    position: "center",
   },
   {
     id: 6,
-    src: "https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+    src: "https://images.pexels.com/photos/7728705/pexels-photo-7728705.jpeg",
+    position: "center",
   },
   {
     id: 7,
-    src: "https://images.unsplash.com/photo-1599586120429-48281b6f0ece?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+    src: "https://images.pexels.com/photos/167538/pexels-photo-167538.jpeg",
+    position: "center",
   },
   {
     id: 8,
-    src: "https://plus.unsplash.com/premium_photo-1671436824833-91c0741e89c9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+    src: "https://images.pexels.com/photos/3608056/pexels-photo-3608056.jpeg",
+    position: "center",
   },
   {
     id: 9,
-    src: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+    src: "https://images.pexels.com/photos/5029853/pexels-photo-5029853.jpeg",
+    position: "center",
   },
 ];
 
 const generateSquares = () => {
+  // Shuffle images randomly
   return shuffle([...squareData]).slice(0, 9).map((sq) => (
     <motion.div
       key={sq.id}
@@ -124,6 +138,7 @@ const generateSquares = () => {
       style={{
         backgroundImage: `url(${sq.src})`,
         backgroundSize: "cover",
+        backgroundPosition: sq.position || "center", // Use position property for backgroundPosition
       }}
     ></motion.div>
   ));
@@ -147,11 +162,6 @@ const Mission = () => {
 
   return (
     <div className="absolute bottom-0 left-1/2 h-80 w-[calc(100vw-56px)] max-w-[1100px] -translate-x-1/2 overflow-hidden rounded-t-xl bg-zinc-900 p-0.5">
-      <div className="flex items-center justify-between px-2 py-1">
-        <span className="rounded px-2 py-0.5 text-xs text-zinc-100">
-          Nossos Parceiros
-        </span>
-      </div>
       <div className="relative z-0 grid h-full w-full grid-cols-3 grid-rows-3 gap-1 overflow-hidden rounded-t-lg bg-white p-2">
         {squares.map((sq) => sq)}
       </div>
@@ -210,10 +220,28 @@ const TranslateWrapper = ({
   );
 };
 
-const LogoItem = ({ Icon, name }: LogoItem) => {
+const LogoItem = (logo: LogoItem) => {
+  const { name } = logo;
+
   return (
     <span className="flex items-center justify-center gap-4 px-4 py-2 md:py-4">
-      <Icon className="text-2xl text-mata-600 md:text-3xl" />
+      {logo.sourceType === "icon" ? (
+        <logo.Icon className="text-2xl text-mata-600 md:text-3xl" />
+      ) : logo.sourceType === "url" ? (
+        <img
+          src={logo.imageUrl}
+          alt={name}
+          className={`${logo.size || "h-10 md:h-12"} w-auto object-contain`}
+          loading="lazy"
+        />
+      ) : (
+        <img
+          src={logo.imagePath}
+          alt={name}
+          className={`${logo.size || "h-6 md:h-8"} w-auto object-contain`}
+          loading="lazy"
+        />
+      )}
       <span className="whitespace-nowrap text-xl font-semibold uppercase md:text-2xl">
         {name}
       </span>
@@ -224,7 +252,7 @@ const LogoItem = ({ Icon, name }: LogoItem) => {
 const LogoItemsTop = () => (
   <>
     {topLogos.map((logo) => (
-      <LogoItem key={logo.name} Icon={logo.Icon} name={logo.name} />
+      <LogoItem key={logo.name} {...logo} />
     ))}
   </>
 );
@@ -232,7 +260,7 @@ const LogoItemsTop = () => (
 const LogoItemsBottom = () => (
   <>
     {bottomLogos.map((logo) => (
-      <LogoItem key={logo.name} Icon={logo.Icon} name={logo.name} />
+      <LogoItem key={logo.name} {...logo} />
     ))}
   </>
 );

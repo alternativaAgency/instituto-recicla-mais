@@ -1,4 +1,4 @@
-import { Footer, Globe, Hero, Mission, Solutions, Testimonials } from "../sections"
+import { Footer, Globe, Hero, Mission, Solutions } from "../sections"
 
 const Home = () => {
   return (
@@ -7,7 +7,7 @@ const Home = () => {
       <Globe />
       <Mission />
       <Solutions />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <Footer />
     </>
   )
