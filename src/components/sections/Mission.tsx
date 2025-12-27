@@ -2,17 +2,18 @@
 import { FiArrowUpRight } from "react-icons/fi";
 
 import { motion } from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { topLogos, bottomLogos } from "@/constants/missionLogos";
 import type { LogoItem } from "@/constants/missionLogos";
+import ImageShuffle from "./ImageShuffle";
 
 const NeuHero = () => {
   return (
     <section className="overflow-hidden py-8 sm:py-12 md:py-24">
       <div className="relative mx-auto flex max-w-6xl flex-col items-center justify-center rounded-t-2xl bg-white/95 backdrop-blur-sm px-4 sm:px-6 md:px-8 lg:px-12 pb-96 sm:pb-[22rem] pt-8 sm:pt-10 md:pt-12 lg:pt-16 shadow-xl">
         <Copy />
-        <Mission />
+        <ImageShuffle />
       </div>
       <Logos />
     </section>
@@ -31,7 +32,7 @@ const Copy = () => {
           rel="nofollow"
           className="flex origin-top-left items-center rounded-full border border-zinc-900 bg-white p-0.5 text-xs sm:text-sm transition-transform hover:-rotate-2"
         >
-          <span className="rounded-full bg-mata-600 px-1 py-0.5 sm:px-2 text-xs sm:text-sm font-medium uppercase text-white">
+          <span className="chip bg-mata-600 text-white text-sm sm:text-base">
             Olá!
           </span>
           <span className="ml-1.5 mr-1 inline-block text-xs sm:text-sm">
@@ -41,11 +42,10 @@ const Copy = () => {
         </a>
       </div>
       <h2 className="max-w-4xl text-center text-2xl sm:text-4xl md:text-6xl font-black leading-[1.15] mb-4 sm:mb-6 md:mb-8">
-        Juntos, construímos soluções reais para um futuro sustentável
+        Juntos, construímos soluções que fortalecem a reciclagem e transformam realidades.
       </h2>
       <p className="mx-auto my-4 sm:my-5 md:my-6 max-w-3xl text-center text-xs sm:text-base md:text-lg lg:text-xl leading-relaxed">
-        Atuamos diretamente na redução de impactos socioambientais por meio de 
-        ações transparentes, mensuráveis e acessíveis. Sua participação viabiliza mudanças concretas.
+        Atuamos na elaboração de projetos que geram impacto socioambiental e fortalecem empresas, cooperativas e associações de catadores.
       </p>
       <Link
         to="https://www.instagram.com/institutoreciclamais/"
@@ -55,117 +55,6 @@ const Copy = () => {
         <FiArrowUpRight className="h-3 w-3 sm:h-4 sm:w-4" />
       </Link>
     </>
-  );
-};
-
-const shuffle = (array: (typeof squareData)[0][]) => {
-  let currentIndex = array.length,
-    randomIndex;
-
-  while (currentIndex != 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
-  }
-
-  return array;
-};
-
-// Position controls CSS backgroundPosition to determine which part of the image is displayed
-// Options: "center", "top", "bottom", "left", "right", "top left", "top right", "bottom left", "bottom right"
-// Or use percentages like "50% 50%", "30% 70%", etc.
-// If position is not specified, defaults to "center"
-const squareData = [
-  {
-    id: 1,
-    src: "https://images.unsplash.com/photo-1547347298-4074fc3086f0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-    position: "center", // Controls which part of the image is displayed
-  },
-  {
-    id: 2,
-    src: "https://images.unsplash.com/photo-1510925758641-869d353cecc7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    position: "center",
-  },
-  {
-    id: 3,
-    src: "https://images.pexels.com/photos/3480494/pexels-photo-3480494.jpeg",
-    position: "center",
-  },
-  {
-    id: 4,
-    src: "https://images.unsplash.com/photo-1580238053495-b9720401fd45?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    position: "center",
-  },
-  {
-    id: 5,
-    src: "https://images.pexels.com/photos/3735208/pexels-photo-3735208.jpeg",
-    position: "center",
-  },
-  {
-    id: 6,
-    src: "https://images.pexels.com/photos/7728705/pexels-photo-7728705.jpeg",
-    position: "center",
-  },
-  {
-    id: 7,
-    src: "https://images.pexels.com/photos/167538/pexels-photo-167538.jpeg",
-    position: "center",
-  },
-  {
-    id: 8,
-    src: "https://images.pexels.com/photos/3608056/pexels-photo-3608056.jpeg",
-    position: "center",
-  },
-  {
-    id: 9,
-    src: "https://images.pexels.com/photos/5029853/pexels-photo-5029853.jpeg",
-    position: "center",
-  },
-];
-
-const generateSquares = () => {
-  // Shuffle images randomly
-  return shuffle([...squareData]).slice(0, 9).map((sq) => (
-    <motion.div
-      key={sq.id}
-      layout
-      transition={{ duration: 1.5, type: "spring" }}
-      className="w-full h-full"
-      style={{
-        backgroundImage: `url(${sq.src})`,
-        backgroundSize: "cover",
-        backgroundPosition: sq.position || "center", // Use position property for backgroundPosition
-      }}
-    ></motion.div>
-  ));
-};
-
-const Mission = () => {
-  const timeoutRef = useRef<any>(null);
-  const [squares, setSquares] = useState(generateSquares());
-
-  useEffect(() => {
-    shuffleSquares();
-
-    return () => clearTimeout(timeoutRef.current);
-  }, []);
-
-  const shuffleSquares = () => {
-    setSquares(generateSquares());
-
-    timeoutRef.current = setTimeout(shuffleSquares, 3000);
-  };
-
-  return (
-    <div className="absolute bottom-0 left-1/2 h-80 w-[calc(100vw-56px)] max-w-[1100px] -translate-x-1/2 overflow-hidden rounded-t-xl bg-zinc-900 p-0.5">
-      <div className="relative z-0 grid h-full w-full grid-cols-3 grid-rows-3 gap-1 overflow-hidden rounded-t-lg bg-white p-2">
-        {squares.map((sq) => sq)}
-      </div>
-    </div>
   );
 };
 

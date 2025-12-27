@@ -1,13 +1,12 @@
-import { Footer, Globe, Hero, Mission, Solutions } from "../sections"
+import { Accordion, Footer, Hero, Mission, Trabalhos } from "../sections"
 
 const Home = () => {
   return (
     <>
       <Hero />
-      <Globe />
+      <Trabalhos />
       <Mission />
-      <Solutions />
-      {/* <Testimonials /> */}
+      <Accordion />
       <Footer />
     </>
   )

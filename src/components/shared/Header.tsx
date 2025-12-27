@@ -9,9 +9,12 @@ const Header = () => {
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
+  
+  // Fallback: Check if navigation links exist
+  const hasNavigationLinks = navigationLinks && navigationLinks.length > 0;
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[var(--color-limpeza)] backdrop-blur-sm shadow-sm border-b border-gray-100">
+    <header className="sticky top-0 z-50 w-full bg-limpeza backdrop-blur-sm shadow-sm border-b border-gray-100">
       <nav className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1 sm:py-2 lg:py-3">
         <div className="flex h-16 lg:h-18 items-center justify-center">
           {/* Logo */}
@@ -42,81 +45,115 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation - Right */}
-          <div className="absolute right-4 sm:right-6 lg:right-8 hidden md:flex md:items-center md:gap-4 uppercase">
-            {navigationLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`relative px-4 py-2 text-base sm:text-lg font-bold rounded-lg ${
-                  isActive(link.path)
-                    ? "text-mata-600 bg-mata-50"
-                    : "text-gray-700 hover:text-mata-600 hover:bg-gray-50"
-                }`}
+          {hasNavigationLinks && (
+            <div className="absolute right-4 sm:right-6 lg:right-8 hidden md:flex md:items-center md:gap-4 uppercase">
+              {navigationLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`relative px-4 py-2 text-base sm:text-lg font-bold rounded-lg ${
+                    isActive(link.path)
+                      ? "text-mata-600 bg-mata-50"
+                      : "text-gray-700 hover:text-mata-600 hover:bg-gray-50"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <a
+                href={getRandomWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex px-4 py-2.5 items-center gap-2 rounded-full bg-mata-600 text-white transition-all duration-300 ease-in-out hover:bg-mata-700 active:bg-mata-800"
               >
-                {link.label}
-              </Link>
-            ))}
-            <a
-              href={getRandomWhatsAppUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex px-4 py-2.5 items-center gap-2 rounded-full bg-mata-600 text-white transition-all duration-300 ease-in-out hover:bg-mata-700 active:bg-mata-800"
-            >
-              <span className="font-medium uppercase">Fale Conosco</span>
-              <FiArrowUpRight className="h-4 w-4" />
-            </a>
-          </div>
+                <span className="font-medium uppercase">Fale Conosco</span>
+                <FiArrowUpRight className="h-4 w-4" />
+              </a>
+            </div>
+          )}
+
+          {/* Desktop Contact Button - Fallback when no nav links */}
+          {!hasNavigationLinks && (
+            <div className="hidden md:flex absolute right-4 sm:right-6 lg:right-8 items-center">
+              <a
+                href={getRandomWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex px-4 py-2.5 items-center gap-2 rounded-full bg-mata-600 text-white transition-all duration-300 ease-in-out hover:bg-mata-700 active:bg-mata-800"
+              >
+                <span className="font-medium uppercase">Fale Conosco</span>
+                <FiArrowUpRight className="h-4 w-4" />
+              </a>
+            </div>
+          )}
 
           {/* Mobile menu button */}
-          <div className="absolute right-4 sm:right-6 lg:right-8 hidden z-[70]">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`inline-flex items-center justify-center p-2.5 rounded-xl transition-all duration-300 relative ${
-                isMenuOpen
-                  ? "bg-mata-600 text-white shadow-lg shadow-mata-600/30"
-                  : "text-gray-700 hover:text-mata-600 hover:bg-gray-100"
-              } focus:outline-none focus:ring-2 focus:ring-mata-600 focus:ring-offset-2`}
-              aria-expanded={isMenuOpen}
-              aria-label="Abrir menu principal"
-            >
-              {!isMenuOpen ? (
-                <svg
-                  className="block h-6 w-6 transition-transform duration-300"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2.5}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  className="block h-6 w-6 transition-transform duration-300 rotate-90"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2.5}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              )}
-            </button>
-          </div>
+          {hasNavigationLinks && (
+            <div className="absolute right-4 sm:right-6 lg:right-8 hidden z-70">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className={`inline-flex items-center justify-center p-2.5 rounded-xl transition-all duration-300 relative ${
+                  isMenuOpen
+                    ? "bg-mata-600 text-white shadow-lg shadow-mata-600/30"
+                    : "text-gray-700 hover:text-mata-600 hover:bg-gray-100"
+                } focus:outline-none focus:ring-2 focus:ring-mata-600 focus:ring-offset-2`}
+                aria-expanded={isMenuOpen}
+                aria-label="Abrir menu principal"
+              >
+                {!isMenuOpen ? (
+                  <svg
+                    className="block h-6 w-6 transition-transform duration-300"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    className="block h-6 w-6 transition-transform duration-300 rotate-90"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                )}
+              </button>
+            </div>
+          )}
+
+          {/* Mobile Contact Button - Fallback when no nav links */}
+          {!hasNavigationLinks && (
+            <div className="absolute right-4 sm:right-6 lg:right-8 md:hidden">
+              <a
+                href={getRandomWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex px-4 py-2.5 items-center gap-2 rounded-full bg-mata-600 text-white transition-all duration-300 ease-in-out hover:bg-mata-700 active:bg-mata-800"
+              >
+                <span className="font-medium uppercase">Fale Conosco</span>
+                <FiArrowUpRight className="h-4 w-4" />
+              </a>
+            </div>
+          )}
         </div>
 
         {/* Mobile Navigation Overlay */}
-        {isMenuOpen && (
-          <div className="md:hidden fixed inset-0 z-[60]">
+        {isMenuOpen && hasNavigationLinks && (
+          <div className="md:hidden fixed inset-0 z-60">
             {/* Backdrop */}
             <div
               className="absolute inset-0 bg-black/20 backdrop-blur-sm"
@@ -157,7 +194,7 @@ const Header = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setIsMenuOpen(false)}
-                    className="group flex items-center justify-center gap-3 w-full px-6 py-4 rounded-2xl bg-gradient-to-r from-mata-600 to-mata-700 text-white font-semibold text-lg shadow-lg shadow-mata-600/30 transition-all duration-300 hover:from-mata-700 hover:to-mata-800 hover:shadow-xl hover:shadow-mata-600/40 active:scale-[0.98]"
+                    className="group flex items-center justify-center gap-3 w-full px-6 py-4 rounded-2xl bg-linear-to-r from-mata-600 to-mata-700 text-white font-semibold text-lg shadow-lg shadow-mata-600/30 transition-all duration-300 hover:from-mata-700 hover:to-mata-800 hover:shadow-xl hover:shadow-mata-600/40 active:scale-[0.98]"
                   >
                     <span>Fale Conosco</span>
                     <FiArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />

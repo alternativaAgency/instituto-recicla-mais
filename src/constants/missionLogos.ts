@@ -113,7 +113,13 @@ const bottomLogos: LogoItem[] = [
   { sourceType: "icon", Icon: GiRecycle, name: "Parceira" },
   { sourceType: "icon", Icon: PiRecycleDuotone, name: "Parceiro" },
   { sourceType: "icon", Icon: GiRecycle, name: "Parceiro" },
-  { sourceType: "icon", Icon: PiRecycleDuotone, name: "Parceira" }
+  { sourceType: "icon", Icon: PiRecycleDuotone, name: "Parceira" },
+  {
+    sourceType: "asset",
+    imagePath: "/assets/logo/green-partner.png",
+    name: "Green Partner",
+    size: "h-6 md:h-[1.875rem]",
+  },
   // Example: Logo from external URL with custom size
   // {
   //   sourceType: "url",

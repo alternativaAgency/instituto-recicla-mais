@@ -135,25 +135,24 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const handleScrollToTop = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
-    // If path is "/" or "#", scroll to top
+    // If path is "/" or "#", reset scroll position
     if (path === "/" || path === "#") {
       e.preventDefault();
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+      window.scrollTo(0, 0);
       return;
     }
-    // For other paths, if we're already on that page, scroll to top
+    // For other paths, if we're already on that page, reset scroll position
     const currentPath = window.location.pathname;
     if (currentPath === path) {
       e.preventDefault();
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+      window.scrollTo(0, 0);
+      return;
     }
-    // Otherwise, let React Router handle navigation normally
+    // For new page navigation, reset scroll position after route change
+    // Use a small delay to ensure the route has changed
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 100);
   };
 
   const socialLinks: SocialLink[] = [
@@ -192,9 +191,8 @@ const Footer = () => {
     {
       title: "Instituto",
       links: [
-        { label: "Sobre Nós", path: "/" },
+        { label: "Sobre Nós", path: "/sobre" },
         { label: "Nossos Serviços", path: "/" },
-        { label: "Notícias", path: "/" },
         { label: "Transparência", path: "/" },
       ],
     },
@@ -202,7 +200,6 @@ const Footer = () => {
       title: "Ajuda",
       links: [
         { label: "Contato", path: "/" },
-        { label: "Perguntas Frequentes", path: "/" },
         { label: "Termos de Uso", path: "/" },
         { label: "Política de Privacidade", path: "/" },
       ],
@@ -241,7 +238,7 @@ const Footer = () => {
               </div>
             </Link>
             <p className="text-sm sm:text-base leading-relaxed text-gray-600 mt-4 sm:mt-7">
-              Juntos, construímos soluções reais para um futuro sustentável através de ações transparentes, mensuráveis e acessíveis.
+              Juntos, construímos soluções que fortalecem a reciclagem e transformam realidades.
             </p>
 
             {/* Social Links */}
