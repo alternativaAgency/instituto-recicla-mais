@@ -36,7 +36,7 @@ const Hero = () => {
         </h2>
 
         <p className="mx-auto mb-8 sm:mb-10 md:mb-12 lg:mb-14 max-w-6xl text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-limpeza">
-          Elaboração, gestão e acompanhamento técnico para cooerativas,
+          Elaboração, gestão e acompanhamento técnico para cooperativas,
           associações de catadores e empresas de reciclagem.
         </p>
 

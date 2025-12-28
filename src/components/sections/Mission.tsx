@@ -49,10 +49,9 @@ const Copy = () => {
       </p>
       <Link
         to="https://www.instagram.com/institutoreciclamais/"
-        className="group flex px-2.5 py-1.5 sm:px-4 sm:py-2.5 items-center gap-1.5 sm:gap-2 rounded-full bg-mata-600 text-white transition-all duration-300 ease-in-out hover:bg-mata-700 active:bg-mata-800 text-xs sm:text-base"
+        className="group flex px-4 py-3 sm:px-4 sm:py-2.5 items-center gap-2 sm:gap-2 rounded-full bg-mata-600 text-white transition-all duration-300 ease-in-out hover:bg-mata-700 active:bg-mata-800 text-base sm:text-base"
       >
         <span className="font-medium">Saiba como participar</span>
-        <FiArrowUpRight className="h-3 w-3 sm:h-4 sm:w-4" />
       </Link>
     </>
   );
@@ -60,7 +59,7 @@ const Copy = () => {
 
 const Logos = () => {
   return (
-    <div className="relative -mt-2 -rotate-1 scale-[1.01] border-y-2 border-zinc-900 bg-white">
+    <div className="relative -mt-2 -rotate-1 scale-[1.01] border-2 border-zinc-900 bg-white">
       <div className="relative z-0 flex overflow-hidden border-b-2 border-zinc-900">
         <TranslateWrapper>
           <LogoItemsTop />

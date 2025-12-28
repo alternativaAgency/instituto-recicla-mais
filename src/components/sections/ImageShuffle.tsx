@@ -70,6 +70,8 @@ interface MasonryProps {
   hoverScale?: number;
   blurToFocus?: boolean;
   colorShiftOnHover?: boolean;
+  randomizeOrder?: boolean;
+  randomizeColumns?: boolean;
 }
 
 const Masonry: React.FC<MasonryProps> = ({
@@ -81,7 +83,9 @@ const Masonry: React.FC<MasonryProps> = ({
   scaleOnHover = true,
   hoverScale = 0.95,
   blurToFocus = true,
-  colorShiftOnHover = false
+  colorShiftOnHover = false,
+  randomizeOrder = false,
+  randomizeColumns = false
 }) => {
   const columns = useMedia(
     ['(min-width:1500px)', '(min-width:1000px)', '(min-width:600px)', '(min-width:400px)'],
@@ -132,8 +136,25 @@ const Masonry: React.FC<MasonryProps> = ({
     const totalGaps = (columns - 1) * gap;
     const columnWidth = (width - totalGaps) / columns;
 
-    return items.map(child => {
-      const col = colHeights.indexOf(Math.min(...colHeights));
+    let itemsToUse: Item[];
+    if (randomizeOrder) {
+      // Extract original heights to preserve the pattern
+      const originalHeights = items.map(item => item.height);
+      // Shuffle the items (images/IDs)
+      const shuffledItems = [...items].sort(() => Math.random() - 0.5);
+      // Reassign heights in the original order to maintain the pattern
+      itemsToUse = shuffledItems.map((item, index) => ({
+        ...item,
+        height: originalHeights[index]
+      }));
+    } else {
+      itemsToUse = items;
+    }
+
+    return itemsToUse.map(child => {
+      const col = randomizeColumns
+        ? Math.floor(Math.random() * columns)
+        : colHeights.indexOf(Math.min(...colHeights));
       const x = col * (columnWidth + gap);
       const height = child.height / 2;
       const y = colHeights[col];
@@ -141,7 +162,7 @@ const Masonry: React.FC<MasonryProps> = ({
       colHeights[col] += height + gap;
       return { ...child, x, y, w: columnWidth, h: height };
     });
-  }, [columns, items, width]);
+  }, [columns, items, width, randomizeOrder, randomizeColumns]);
 
   const hasMounted = useRef(false);
 
@@ -296,6 +317,12 @@ const imageItems: Item[] = [
     img: 'https://images.pexels.com/photos/5029853/pexels-photo-5029853.jpeg',
     url: 'https://www.instagram.com/institutoreciclamais/',
     height: 410
+  },
+  {
+    id: '10',
+    img: 'https://images.pexels.com/photos/7232839/pexels-photo-7232839.jpeg',
+    url: 'https://www.instagram.com/institutoreciclamais/',
+    height: 410
   }
 ];
 
@@ -309,6 +336,7 @@ const ImageShuffle = () => {
           scaleOnHover={true}
           blurToFocus={true}
           colorShiftOnHover={false}
+          randomizeOrder={true}
         />
       </div>
     </div>

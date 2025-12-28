@@ -41,9 +41,9 @@ export const faqQuestions: FAQQuestion[] = [
   {
     title: "Quais Documentos necessários da proponente?",
     answer: [
-      "- Cartão de CNPJ, em situação ativa e que comprove o funcionamento há pelo menos um ano, ou seis meses no caso de empreendimentos de catadores - podendo ser retirado no site..",
+      "- Cartão de CNPJ, em situação ativa e que comprove o funcionamento há pelo menos um ano, ou seis meses no caso de empreendimentos de catadores - podendo ser retirado no site.",
       "- Cópia do ato que constituiu a pessoa jurídica, que pode ser a última alteração contratual ou estatutária, certificado de microempreendedor, requerimento de empresário ou documento equivalente, devidamente registrado no órgão competente;",
-      "- Cópia da ata de eleição e termpo da posse da atual diretoria, devidamente registrada, ou do ato de nomeação dos atuais dirigentes, quando for o caso;",
+      "- Cópia da ata de eleição e termo da posse da atual diretoria, devidamente registrada, ou do ato de nomeação dos atuais dirigentes, quando for o caso;",
       "- Cópia do documento de identidade do(s) dirigente(s), contendo número da carteira de identidade, do CPF, foto e assinatura;",
       "- Portfólio de atividades no setor da reciclagem ou, caso a proponente não possua, juntar o currículo da equipe técnica que constará na ficha técnica do Projeto.",
     ],
@@ -51,7 +51,7 @@ export const faqQuestions: FAQQuestion[] = [
   {
     title: "Quem pode incentivar um projeto?",
     answer: [
-      "Pessoas físicas e jurídicas tributadas com base no lucro real tenham a opção de deduzir parte do imposto de renda em virtude do apoio direto a projetos de reciclagem.",
+      "Pessoas físicas e jurídicas tributadas com base no lucro real têm a opção de deduzir parte do imposto de renda em virtude do apoio direto a projetos de reciclagem.",
       "As pessoas físicas e jurídicas poderão selecionar projetos admitidos pelo MMA para realizar o aporte de recursos denominado “Incentivo” e no ano calendário seguinte deduzir o Incentivo no Imposto devido limitado aos seguintes percentuais:",
       <TaxTable data={taxData} className="mt-4" />,
     ],
@@ -65,7 +65,7 @@ export const faqQuestions: FAQQuestion[] = [
     title: "O que pode ser solicitado para o Projeto?",
     answer: [
       "CAPACITAÇÃO, FORMAÇÃO E ASSESSORIA TÉCNICA",
-      "INCUBAÇÃO (Propostas que contemplem estruturas técnico-administrativa necessária ao funcionamento de empreendimentos que atuem em atividades de reciclagem)",
+      "INCUBAÇÃO (Propostas que contemplem estruturas técnico-administrativas necessárias ao funcionamento de empreendimentos que atuem em atividades de reciclagem)",
       "PESQUISAS E ESTUDOS: Propostas que contemplem pesquisas e estudos que envolvam a responsabilidade compartilhada pelo ciclo de vida dos produtos, incluindo materiais e equipamentos necessários.",
       "INFRAESTRUTURA FÍSICA: Propostas que contemplem projeto de execução de obras novas ou reformas.",
       "EQUIPAMENTOS E VEÍCULOS: Propostas que contemplem a aquisição de equipamentos necessários às atividades de reutilização, beneficiamento, tratamento, reciclagem e compostagem de resíduos, além de veículos para a coleta seletiva.",
