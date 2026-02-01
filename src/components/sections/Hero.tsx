@@ -30,7 +30,7 @@ const Hero = () => {
           </div>
         </div>
 
-        <h2 className="mb-6 sm:mb-8 md:mb-10 lg:mb-12 text-3xl sm:text-xl md:text-2xl lg:text-5xl xl:text-6xl font-black leading-tight text-limpeza">
+        <h2 className="mb-6 sm:mb-8 md:mb-10 lg:mb-12 text-3xl sm:text-xl md:text-2xl lg:text-5xl xl:text-6xl font-medium leading-tight text-limpeza">
           Transformamos iniciativas de reciclagem em projetos aptos a captar
           recursos via Lei de Incentivo a Reciclagem
         </h2>

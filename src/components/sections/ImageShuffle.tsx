@@ -88,9 +88,9 @@ const Masonry: React.FC<MasonryProps> = ({
   randomizeColumns = false
 }) => {
   const columns = useMedia(
-    ['(min-width:1500px)', '(min-width:1000px)', '(min-width:600px)', '(min-width:400px)'],
-    [5, 4, 3, 2],
-    1
+    ['(min-width:1500px)', '(min-width:1000px)', '(min-width:600px)'],
+    [5, 4, 3],
+    2
   );
 
   const [containerRef, { width }] = useMeasure<HTMLDivElement>();
@@ -266,7 +266,7 @@ const Masonry: React.FC<MasonryProps> = ({
 const imageItems: Item[] = [
   {
     id: '1',
-    img: 'https://images.pexels.com/photos/1072824/pexels-photo-1072824.jpeg',
+    img: '/assets/images/18.jpg',
     url: 'https://www.instagram.com/institutoreciclamais/',
     height: 300
   },
@@ -288,47 +288,52 @@ const imageItems: Item[] = [
     url: 'https://www.instagram.com/institutoreciclamais/',
     height: 280
   },
+
   {
     id: '5',
-    img: 'https://images.pexels.com/photos/3735208/pexels-photo-3735208.jpeg',
+    img: '/assets/images/03.jpg',
     url: 'https://www.instagram.com/institutoreciclamais/',
-    height: 450
+    height: 400
   },
   {
     id: '6',
-    img: 'https://images.pexels.com/photos/7728705/pexels-photo-7728705.jpeg',
+    img: '/assets/images/04.jpg',
     url: 'https://www.instagram.com/institutoreciclamais/',
     height: 320
   },
+
   {
     id: '7',
     img: 'https://images.pexels.com/photos/167538/pexels-photo-167538.jpeg',
     url: 'https://www.instagram.com/institutoreciclamais/',
     height: 380
   },
+
   {
     id: '8',
-    img: 'https://images.pexels.com/photos/3608056/pexels-photo-3608056.jpeg',
+    img: '/assets/images/06.jpg',
     url: 'https://www.instagram.com/institutoreciclamais/',
     height: 290
   },
+
   {
     id: '9',
     img: 'https://images.pexels.com/photos/5029853/pexels-photo-5029853.jpeg',
     url: 'https://www.instagram.com/institutoreciclamais/',
     height: 410
   },
+
   {
     id: '10',
-    img: 'https://images.pexels.com/photos/7232839/pexels-photo-7232839.jpeg',
+    img: '/assets/images/09.jpg',
     url: 'https://www.instagram.com/institutoreciclamais/',
     height: 410
-  }
+  },
 ];
 
 const ImageShuffle = () => {
   return (
-    <div className="absolute bottom-0 left-1/2 h-80 w-[calc(100vw-56px)] max-w-[1100px] -translate-x-1/2 overflow-hidden rounded-t-xl bg-zinc-900 p-0.5">
+    <div className="absolute bottom-0 left-1/2 h-80 w-[calc(100vw-56px)] max-w-[1100px] -translate-x-1/2 overflow-hidden rounded-t-xl bg-gradient-to-b from-zinc-900 to-transparent p-0.5">
       <div className="relative z-0 h-full w-full overflow-hidden rounded-t-lg bg-white p-2">
         <Masonry
           items={imageItems}

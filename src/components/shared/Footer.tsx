@@ -122,7 +122,7 @@ const BlockInTextCard = ({
           className="flex w-full origin-top-left items-center justify-center rounded-full border border-zinc-900 bg-white p-0.5 text-sm transition-transform hover:-rotate-2"
         >
           <span className="ml-1.5 mr-1 inline-block">
-          Entre em Contato
+            Entre em Contato
           </span>
           <FiArrowUpRight className="mr-2 inline-block" />
         </a>
@@ -213,8 +213,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-y-8 sm:gap-y-12 md:gap-y-16 gap-x-8 sm:gap-x-12">
           {/* Logo and Description */}
           <div className="col-span-2 md:col-span-3 lg:col-span-2 lg:pr-8">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               onClick={(e) => handleScrollToTop(e, "/")}
               className="inline-block"
             >

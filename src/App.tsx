@@ -1,7 +1,7 @@
 import "@/index.css";
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "./components/MainLayout";
-import { Home, Sobre } from "./components/pages";
+import { Contact, Home, News, Services, Sobre, Transparency } from "./components/pages";
 
 function App() {
   return (
@@ -9,6 +9,10 @@ function App() {
       <Route element={<MainLayout />}>
         <Route index element={<Home />} />
         <Route path="/sobre" element={<Sobre />} />
+        <Route path="/servicos" element={<Services />} />
+        <Route path="/transparencia" element={<Transparency />} />
+        <Route path="/noticias" element={<News />} />
+        <Route path="/contato" element={<Contact />} />
       </Route>
     </Routes>
   );

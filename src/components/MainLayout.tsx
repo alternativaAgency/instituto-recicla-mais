@@ -11,10 +11,10 @@ const MainLayout = () => {
   }, [location.pathname]);
 
   return (
-    <div 
+    <div
       className="flex flex-col min-h-screen bg-cover bg-center bg-fixed bg-no-repeat"
       style={{
-        backgroundImage: 'url(/assets/images/background-one.jpg)',
+        backgroundImage: 'url(/assets/images/bigleaf.jpg)',
       }}
     >
       <Header />

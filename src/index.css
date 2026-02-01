@@ -160,12 +160,15 @@
   --color-mata-900: #1f4832;
   --color-mata-950: #113623;
 
-  --color-fluid: #98ddb6; /* mata-300 */
-  --color-sustentabilidade: #c6ecd6; /* mata-200 */
+  --color-fluid: #98ddb6;
+  /* mata-300 */
+  --color-sustentabilidade: #c6ecd6;
+  /* mata-200 */
   --color-limpeza: #ede7e7;
   --color-sky: #77b6ec;
   --color-ocean: #012338;
   --color-vida: #db5925;
+  --color-navy: #1f4832;
 
   /* Font Families */
   --font-family-primary: 'Geom', system-ui, -apple-system, sans-serif;
@@ -176,12 +179,15 @@
   font-family: "ObjectSans", system-ui, -apple-system, sans-serif;
 
   /* Color Palette */
-  --color-fluid: #98ddb6; /* mata-300 */
-  --color-sustentabilidade: #c6ecd6; /* mata-200 */
+  --color-fluid: #98ddb6;
+  /* mata-300 */
+  --color-sustentabilidade: #c6ecd6;
+  /* mata-200 */
   --color-limpeza: #ede7e7;
   --color-sky: #77b6ec;
   --color-ocean: #012338;
   --color-vida: #db5925;
+  --color-navy: #1f4832;
 
   /* Color MATA - CSS Variables */
   --color-mata: #113623;
@@ -241,6 +247,7 @@
   --input: 217.2 32.6% 17.5%;
   --ring: 212.7 26.8% 83.9%;
 }
+
 /*
 
 *,
@@ -285,8 +292,10 @@ body::-webkit-scrollbar {
 /* Hide scrollbar for IE, Edge and Firefox */
 html,
 body {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 #root {
@@ -299,7 +308,12 @@ a {
   text-decoration: inherit;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Geom', system-ui, -apple-system, sans-serif;
 }
 
@@ -315,6 +329,7 @@ button {
   transition: border-color 0.25s;
   font-family: 'ObjectSans', system-ui, -apple-system, sans-serif;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -364,6 +379,7 @@ button:focus-visible {
     opacity: 0;
     transform: scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -371,10 +387,13 @@ button:focus-visible {
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.6;
     transform: scale(1);
   }
+
   50% {
     opacity: 1;
     transform: scale(1.2);
@@ -386,6 +405,7 @@ button:focus-visible {
     opacity: 1;
     transform: scale(1);
   }
+
   to {
     opacity: 0;
     transform: scale(0.95);
@@ -397,6 +417,7 @@ button:focus-visible {
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -413,6 +434,7 @@ button:focus-visible {
     height: 0;
     opacity: 0;
   }
+
   to {
     height: var(--radix-accordion-content-height);
     opacity: 1;
@@ -424,6 +446,7 @@ button:focus-visible {
     height: var(--radix-accordion-content-height);
     opacity: 1;
   }
+
   to {
     height: 0;
     opacity: 0;
@@ -441,7 +464,7 @@ button:focus-visible {
 /* Ensure map popups appear above all content, including grid columns */
 .mapboxgl-popup,
 .maplibregl-popup {
-  z-index: 99999 !important;
+  z-index: 50 !important;
   position: absolute !important;
   max-width: 100% !important;
   max-height: 100% !important;
@@ -449,7 +472,7 @@ button:focus-visible {
 
 .mapboxgl-popup-content-wrapper,
 .maplibregl-popup-content-wrapper {
-  z-index: 99999 !important;
+  z-index: 50 !important;
   background: transparent !important;
   border-radius: 0 !important;
   box-shadow: none !important;
@@ -458,7 +481,7 @@ button:focus-visible {
 
 .mapboxgl-popup-content,
 .maplibregl-popup-content {
-  z-index: 99999 !important;
+  z-index: 50 !important;
   position: relative;
   padding: 0 !important;
   background: transparent !important;
@@ -489,7 +512,8 @@ button:focus-visible {
 
 .mapboxgl-popup-tip,
 .maplibregl-popup-tip {
-  z-index: 99999 !important;
+  z-index: 50 !important;
   border-top-color: #3fa86e !important;
 }
+
 /*

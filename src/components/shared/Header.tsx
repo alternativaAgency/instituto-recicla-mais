@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FiArrowUpRight  } from "react-icons/fi";
+import { FiArrowUpRight } from "react-icons/fi";
 import { navigationLinks } from "@/constants/useMenuLinks";
 import { getRandomWhatsAppUrl } from "@/utils/whatsapp";
 
@@ -9,35 +9,83 @@ const Header = () => {
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
-  
+
   // Fallback: Check if navigation links exist
   const hasNavigationLinks = navigationLinks && navigationLinks.length > 0;
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-limpeza backdrop-blur-sm shadow-sm border-b border-gray-100">
-      <nav className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1 sm:py-2 lg:py-3">
-        <div className="flex h-16 lg:h-18 items-center justify-center">
+    <header className="sticky top-0 z-[100] w-full bg-[var(--color-mata-950)] backdrop-blur-sm">
+      <nav className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex h-20 lg:h-24 items-center justify-center">
           {/* Logo */}
           <div className="absolute left-4 sm:left-6 lg:left-8">
             <Link
               to="/"
               className="flex items-center transition-opacity hover:opacity-80"
             >
-              <div className="h-12 sm:h-16 relative inline-block">
+              {/* Desktop Logo */}
+              <div className="hidden md:inline-block h-20 relative">
                 <img
-                  src="/assets/logo/main.png"
+                  src="/assets/logo/mainlogo.png"
                   alt=""
-                  className="h-12 sm:h-16 w-auto opacity-0"
+                  className="h-20 w-auto opacity-0"
                   aria-hidden="true"
                 />
-                <div 
+                {/* Text Part (White) */}
+                <div
                   className="absolute inset-0"
                   style={{
-                    backgroundColor: 'var(--color-mata-900)',
-                    WebkitMask: 'url(/assets/logo/main.png) no-repeat center / contain',
+                    backgroundColor: 'white',
+                    WebkitMask: 'url(/assets/logo/mainlogo.png) no-repeat center / contain',
                     WebkitMaskSize: 'contain',
-                    mask: 'url(/assets/logo/main.png) no-repeat center / contain',
+                    mask: 'url(/assets/logo/mainlogo.png) no-repeat center / contain',
                     maskSize: 'contain',
+                    clipPath: 'polygon(0 0, 82% 0, 82% 100%, 0 100%)',
+                  }}
+                />
+                {/* Icon Part (custom green) */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundColor: '#c0cd9b',
+                    WebkitMask: 'url(/assets/logo/mainlogo.png) no-repeat center / contain',
+                    WebkitMaskSize: 'contain',
+                    mask: 'url(/assets/logo/mainlogo.png) no-repeat center / contain',
+                    maskSize: 'contain',
+                    clipPath: 'polygon(82% 0, 100% 0, 100% 100%, 82% 100%)',
+                  }}
+                />
+              </div>
+
+              {/* Mobile Logo */}
+              <div className="inline-block md:hidden h-20 relative">
+                <img
+                  src="/assets/logo/topmainlogo.png"
+                  alt="Instituto Recicla Mais"
+                  className="h-20 w-auto opacity-0"
+                />
+                {/* Text Part (White) */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundColor: 'white',
+                    WebkitMask: 'url(/assets/logo/topmainlogo.png) no-repeat center / contain',
+                    WebkitMaskSize: 'contain',
+                    mask: 'url(/assets/logo/topmainlogo.png) no-repeat center / contain',
+                    maskSize: 'contain',
+                    clipPath: 'polygon(0 0, 73% 0, 73% 100%, 0 100%)',
+                  }}
+                />
+                {/* Icon Part (custom green) */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundColor: '#c0cd9b',
+                    WebkitMask: 'url(/assets/logo/topmainlogo.png) no-repeat center / contain',
+                    WebkitMaskSize: 'contain',
+                    mask: 'url(/assets/logo/topmainlogo.png) no-repeat center / contain',
+                    maskSize: 'contain',
+                    clipPath: 'polygon(73% 0, 100% 0, 100% 100%, 73% 100%)',
                   }}
                 />
               </div>
@@ -51,11 +99,10 @@ const Header = () => {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`relative px-4 py-2 text-base sm:text-lg font-bold rounded-lg ${
-                    isActive(link.path)
-                      ? "text-mata-600 bg-mata-50"
-                      : "text-gray-700 hover:text-mata-600 hover:bg-gray-50"
-                  }`}
+                  className={`relative px-4 py-2 text-base sm:text-lg font-bold rounded-lg ${isActive(link.path)
+                    ? "text-mata-300 bg-mata-900/50"
+                    : "text-white hover:text-mata-300 hover:bg-white/10"
+                    }`}
                 >
                   {link.label}
                 </Link>
@@ -64,10 +111,15 @@ const Header = () => {
                 href={getRandomWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex px-4 py-2.5 items-center gap-2 rounded-full bg-mata-600 text-white transition-all duration-300 ease-in-out hover:bg-mata-700 active:bg-mata-800"
+                className="group relative flex items-center justify-center h-20 w-20 lg:h-24 lg:w-24 hover:scale-105 transition-transform duration-300"
               >
-                <span className="font-medium uppercase">Fale Conosco</span>
-                <FiArrowUpRight className="h-4 w-4" />
+                <div
+                  className="absolute inset-0 bg-[#c0cd9b] transition-colors duration-300 group-hover:bg-mata-50"
+                  style={{
+                    clipPath: 'polygon(35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%)'
+                  }}
+                />
+                <span className="relative z-10 font-['Geom'] font-light text-sm tracking-wider text-mata-950 uppercase">Contato</span>
               </a>
             </div>
           )}
@@ -79,10 +131,15 @@ const Header = () => {
                 href={getRandomWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex px-4 py-2.5 items-center gap-2 rounded-full bg-mata-600 text-white transition-all duration-300 ease-in-out hover:bg-mata-700 active:bg-mata-800"
+                className="group relative flex items-center justify-center h-20 w-20 lg:h-24 lg:w-24 hover:scale-105 transition-transform duration-300"
               >
-                <span className="font-medium uppercase">Fale Conosco</span>
-                <FiArrowUpRight className="h-4 w-4" />
+                <div
+                  className="absolute inset-0 bg-[#c0cd9b] transition-colors duration-300 group-hover:bg-mata-50"
+                  style={{
+                    clipPath: 'polygon(35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%)'
+                  }}
+                />
+                <span className="relative z-10 font-['Geom'] font-light text-sm tracking-wider text-mata-950 uppercase">Contato</span>
               </a>
             </div>
           )}
@@ -92,11 +149,10 @@ const Header = () => {
             <div className="absolute right-4 sm:right-6 lg:right-8 hidden z-70">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className={`inline-flex items-center justify-center p-2.5 rounded-xl transition-all duration-300 relative ${
-                  isMenuOpen
-                    ? "bg-mata-600 text-white shadow-lg shadow-mata-600/30"
-                    : "text-gray-700 hover:text-mata-600 hover:bg-gray-100"
-                } focus:outline-none focus:ring-2 focus:ring-mata-600 focus:ring-offset-2`}
+                className={`inline-flex items-center justify-center p-2.5 rounded-xl transition-all duration-300 relative ${isMenuOpen
+                  ? "bg-mata-600 text-white shadow-lg shadow-mata-600/30"
+                  : "text-white hover:text-mata-300 hover:bg-white/10"
+                  } focus:outline-none focus:ring-2 focus:ring-mata-600 focus:ring-offset-2`}
                 aria-expanded={isMenuOpen}
                 aria-label="Abrir menu principal"
               >
@@ -142,10 +198,15 @@ const Header = () => {
                 href={getRandomWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex px-4 py-2.5 items-center gap-2 rounded-full bg-mata-600 text-white transition-all duration-300 ease-in-out hover:bg-mata-700 active:bg-mata-800"
+                className="group relative flex items-center justify-center h-20 w-20 hover:scale-105 transition-transform duration-300"
               >
-                <span className="font-medium uppercase">Fale Conosco</span>
-                <FiArrowUpRight className="h-4 w-4" />
+                <div
+                  className="absolute inset-0 bg-[#c0cd9b] transition-colors duration-300 group-hover:bg-mata-50"
+                  style={{
+                    clipPath: 'polygon(35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%)'
+                  }}
+                />
+                <span className="relative z-10 font-['Geom'] font-light text-xs tracking-wider text-mata-950 uppercase">Contato</span>
               </a>
             </div>
           )}
@@ -170,11 +231,10 @@ const Header = () => {
                       key={link.path}
                       to={link.path}
                       onClick={() => setIsMenuOpen(false)}
-                      className={`group flex items-center px-6 py-4 rounded-2xl text-lg font-semibold transition-all duration-300 ${
-                        isActive(link.path)
-                          ? "text-white bg-mata-600 shadow-lg shadow-mata-600/30 scale-[1.02]"
-                          : "text-gray-800 hover:text-mata-600 hover:bg-mata-50 active:scale-[0.98]"
-                      }`}
+                      className={`group flex items-center px-6 py-4 rounded-2xl text-lg font-semibold transition-all duration-300 ${isActive(link.path)
+                        ? "text-white bg-mata-600 shadow-lg shadow-mata-600/30 scale-[1.02]"
+                        : "text-gray-800 hover:text-mata-600 hover:bg-mata-50 active:scale-[0.98]"
+                        }`}
                       style={{
                         animationDelay: `${index * 50}ms`,
                       }}

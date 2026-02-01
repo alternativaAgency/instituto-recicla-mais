@@ -8,5 +8,24 @@ export const navigationLinks: NavigationLink[] = [
   //   path: "/",
   //   label: "Início",
   // },
-  // I'll be adding more links here in the future
+  // {
+  //   path: "/sobre",
+  //   label: "Sobre",
+  // },
+  // {
+  //   path: "/servicos",
+  //   label: "Serviços",
+  // },
+  // {
+  //   path: "/transparencia",
+  //   label: "Transparência",
+  // },
+  // {
+  //   path: "/noticias",
+  //   label: "Notícias",
+  // },
+  // {
+  //   path: "/contato",
+  //   label: "Contato",
+  // },
 ];

@@ -8,3 +8,5 @@ export { default as AboutHero } from "./AboutHero";
 export { default as AboutContent } from "./AboutContent";
 export { default as Vision } from "./Vision";
 export { default as Values } from "./Values";
+export { default as Hero1 } from "./Hero copy";
+export { default as Mapa } from "./Mapa";

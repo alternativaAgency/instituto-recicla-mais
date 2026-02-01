@@ -22,7 +22,7 @@ export function AccordionItem({ title, answer, defaultOpen = false }: AccordionP
     if (typeof answer !== "string" && !Array.isArray(answer)) {
       return answer;
     }
-    
+
     // If it's an array of strings, render each as a paragraph
     if (Array.isArray(answer)) {
       return (
@@ -35,7 +35,7 @@ export function AccordionItem({ title, answer, defaultOpen = false }: AccordionP
         </>
       );
     }
-    
+
     // If it's a string, render as a single paragraph
     return <p>{answer}</p>;
   };
