@@ -27,7 +27,7 @@ const Values = () => {
         <p className="mb-8 sm:mb-10 md:mb-12 text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-700 text-center max-w-3xl mx-auto">
           Nossos valores refletem o compromisso com:
         </p>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
           {values.map((value, index) => (
             <div
@@ -43,7 +43,7 @@ const Values = () => {
             </div>
           ))}
         </div>
-        
+
         <p className="mt-10 sm:mt-12 md:mt-16 text-lg sm:text-xl md:text-2xl leading-relaxed text-gray-700 text-center max-w-4xl mx-auto">
           Guiados por esses princípios, trabalhamos diariamente para construir soluções consistentes, inclusivas e regenerativas, capazes de gerar mudanças reais hoje e para as próximas gerações.
         </p>

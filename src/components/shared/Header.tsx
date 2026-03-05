@@ -14,9 +14,18 @@ const Header = () => {
   const hasNavigationLinks = navigationLinks && navigationLinks.length > 0;
 
   return (
-    <header className="sticky top-0 z-[100] w-full bg-[var(--color-mata-950)] backdrop-blur-sm">
+    <header className="sticky top-0 z-[100] w-full" style={{ background: 'var(--color-limpeza)' }}>
+      <style>
+        {`
+          @media (min-width: 1024px) {
+            header {
+              background: linear-gradient(110deg, var(--color-limpeza) 50vw, transparent 68vw) !important;
+            }
+          }
+        `}
+      </style>
       <nav className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-20 lg:h-24 items-center justify-center">
+        <div className="flex h-16 lg:h-20 items-center justify-center">
           {/* Logo */}
           <div className="absolute left-4 sm:left-6 lg:left-8">
             <Link
@@ -24,18 +33,18 @@ const Header = () => {
               className="flex items-center transition-opacity hover:opacity-80"
             >
               {/* Desktop Logo */}
-              <div className="hidden md:inline-block h-20 relative">
+              <div className="hidden md:inline-block h-12 lg:h-16 relative">
                 <img
                   src="/assets/logo/mainlogo.png"
                   alt=""
-                  className="h-20 w-auto opacity-0"
+                  className="h-12 lg:h-16 w-auto opacity-0"
                   aria-hidden="true"
                 />
                 {/* Text Part (White) */}
                 <div
                   className="absolute inset-0"
                   style={{
-                    backgroundColor: 'white',
+                    backgroundColor: 'var(--color-mata-950)',
                     WebkitMask: 'url(/assets/logo/mainlogo.png) no-repeat center / contain',
                     WebkitMaskSize: 'contain',
                     mask: 'url(/assets/logo/mainlogo.png) no-repeat center / contain',
@@ -47,7 +56,7 @@ const Header = () => {
                 <div
                   className="absolute inset-0"
                   style={{
-                    backgroundColor: '#c0cd9b',
+                    backgroundColor: 'var(--color-mata-950)',
                     WebkitMask: 'url(/assets/logo/mainlogo.png) no-repeat center / contain',
                     WebkitMaskSize: 'contain',
                     mask: 'url(/assets/logo/mainlogo.png) no-repeat center / contain',
@@ -58,17 +67,17 @@ const Header = () => {
               </div>
 
               {/* Mobile Logo */}
-              <div className="inline-block md:hidden h-20 relative">
+              <div className="inline-block md:hidden h-12 relative">
                 <img
                   src="/assets/logo/topmainlogo.png"
                   alt="Instituto Recicla Mais"
-                  className="h-20 w-auto opacity-0"
+                  className="h-12 w-auto opacity-0"
                 />
                 {/* Text Part (White) */}
                 <div
                   className="absolute inset-0"
                   style={{
-                    backgroundColor: 'white',
+                    backgroundColor: 'var(--color-mata-950)',
                     WebkitMask: 'url(/assets/logo/topmainlogo.png) no-repeat center / contain',
                     WebkitMaskSize: 'contain',
                     mask: 'url(/assets/logo/topmainlogo.png) no-repeat center / contain',
@@ -80,7 +89,7 @@ const Header = () => {
                 <div
                   className="absolute inset-0"
                   style={{
-                    backgroundColor: '#c0cd9b',
+                    backgroundColor: 'var(--color-mata-950)',
                     WebkitMask: 'url(/assets/logo/topmainlogo.png) no-repeat center / contain',
                     WebkitMaskSize: 'contain',
                     mask: 'url(/assets/logo/topmainlogo.png) no-repeat center / contain',
@@ -100,8 +109,8 @@ const Header = () => {
                   key={link.path}
                   to={link.path}
                   className={`relative px-4 py-2 text-base sm:text-lg font-bold rounded-lg ${isActive(link.path)
-                    ? "text-mata-300 bg-mata-900/50"
-                    : "text-white hover:text-mata-300 hover:bg-white/10"
+                    ? "text-mata-500 bg-mata-100/50"
+                    : "text-mata-950 hover:text-mata-500 hover:bg-black/5"
                     }`}
                 >
                   {link.label}
@@ -111,15 +120,10 @@ const Header = () => {
                 href={getRandomWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative flex items-center justify-center h-20 w-20 lg:h-24 lg:w-24 hover:scale-105 transition-transform duration-300"
+                className="group flex px-5 py-2.5 items-center gap-2 rounded-full bg-mata-600 text-white transition-all duration-300 ease-in-out hover:bg-mata-700 active:bg-mata-800 hover:scale-105"
               >
-                <div
-                  className="absolute inset-0 bg-[#c0cd9b] transition-colors duration-300 group-hover:bg-mata-50"
-                  style={{
-                    clipPath: 'polygon(35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%)'
-                  }}
-                />
-                <span className="relative z-10 font-['Geom'] font-light text-sm tracking-wider text-mata-950 uppercase">Contato</span>
+                <span className="font-medium uppercase">Contato</span>
+                <FiArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </div>
           )}
@@ -131,15 +135,10 @@ const Header = () => {
                 href={getRandomWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative flex items-center justify-center h-20 w-20 lg:h-24 lg:w-24 hover:scale-105 transition-transform duration-300"
+                className="group flex px-5 py-2.5 items-center gap-2 rounded-full bg-mata-600 text-white transition-all duration-300 ease-in-out hover:bg-mata-700 active:bg-mata-800 hover:scale-105"
               >
-                <div
-                  className="absolute inset-0 bg-[#c0cd9b] transition-colors duration-300 group-hover:bg-mata-50"
-                  style={{
-                    clipPath: 'polygon(35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%)'
-                  }}
-                />
-                <span className="relative z-10 font-['Geom'] font-light text-sm tracking-wider text-mata-950 uppercase">Contato</span>
+                <span className="font-medium uppercase">Contato</span>
+                <FiArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </div>
           )}
@@ -151,7 +150,7 @@ const Header = () => {
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className={`inline-flex items-center justify-center p-2.5 rounded-xl transition-all duration-300 relative ${isMenuOpen
                   ? "bg-mata-600 text-white shadow-lg shadow-mata-600/30"
-                  : "text-white hover:text-mata-300 hover:bg-white/10"
+                  : "text-mata-950 hover:text-mata-500 hover:bg-black/5"
                   } focus:outline-none focus:ring-2 focus:ring-mata-600 focus:ring-offset-2`}
                 aria-expanded={isMenuOpen}
                 aria-label="Abrir menu principal"
@@ -198,15 +197,10 @@ const Header = () => {
                 href={getRandomWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative flex items-center justify-center h-20 w-20 hover:scale-105 transition-transform duration-300"
+                className="group flex px-4 py-2 items-center gap-2 rounded-full bg-mata-600 text-white transition-all duration-300 ease-in-out hover:bg-mata-700 active:bg-mata-800 hover:scale-105"
               >
-                <div
-                  className="absolute inset-0 bg-[#c0cd9b] transition-colors duration-300 group-hover:bg-mata-50"
-                  style={{
-                    clipPath: 'polygon(35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%)'
-                  }}
-                />
-                <span className="relative z-10 font-['Geom'] font-light text-xs tracking-wider text-mata-950 uppercase">Contato</span>
+                <span className="font-medium text-sm uppercase">Contato</span>
+                <FiArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </div>
           )}

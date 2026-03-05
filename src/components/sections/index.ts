@@ -1,4 +1,5 @@
 export { default as Hero } from "./Hero";
+export { default as HeroSub } from "./HeroSub";
 export { default as Trabalhos } from "./Trabalhos";
 export { default as Mission } from "./Mission";
 export { default as Faq } from "./Faq";
@@ -8,5 +9,6 @@ export { default as AboutHero } from "./AboutHero";
 export { default as AboutContent } from "./AboutContent";
 export { default as Vision } from "./Vision";
 export { default as Values } from "./Values";
-export { default as Hero1 } from "./Hero copy";
 export { default as Mapa } from "./Mapa";
+export { SectionDivider } from "./SectionDivider";
+export { default as TestHero } from "./TestHero";

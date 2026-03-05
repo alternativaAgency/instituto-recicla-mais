@@ -12,7 +12,7 @@ const MainLayout = () => {
 
   return (
     <div
-      className="flex flex-col min-h-screen bg-cover bg-center bg-fixed bg-no-repeat"
+      className="flex flex-col min-h-screen bg-cover bg-center bg-no-repeat md:bg-fixed"
       style={{
         backgroundImage: 'url(/assets/images/bigleaf.jpg)',
       }}

@@ -129,29 +129,33 @@ const Masonry: React.FC<MasonryProps> = ({
     preloadImages(items.map(i => i.img)).then(() => setImagesReady(true));
   }, [items]);
 
-  const grid = useMemo<GridItem[]>(() => {
-    if (!width) return [];
+  const isMobile = useMedia(['(max-width: 600px)'], [1], 0) === 1;
+
+  const { grid, maxHeight } = useMemo(() => {
+    if (!width) return { grid: [], maxHeight: 0 };
     const colHeights = new Array(columns).fill(0);
     const gap = 16;
     const totalGaps = (columns - 1) * gap;
     const columnWidth = (width - totalGaps) / columns;
 
+    let itemsToProcess = isMobile ? items.slice(0, 10) : items;
+
     let itemsToUse: Item[];
     if (randomizeOrder) {
       // Extract original heights to preserve the pattern
-      const originalHeights = items.map(item => item.height);
+      const originalHeights = itemsToProcess.map(item => item.height);
       // Shuffle the items (images/IDs)
-      const shuffledItems = [...items].sort(() => Math.random() - 0.5);
+      const shuffledItems = [...itemsToProcess].sort(() => Math.random() - 0.5);
       // Reassign heights in the original order to maintain the pattern
       itemsToUse = shuffledItems.map((item, index) => ({
         ...item,
         height: originalHeights[index]
       }));
     } else {
-      itemsToUse = items;
+      itemsToUse = itemsToProcess;
     }
 
-    return itemsToUse.map(child => {
+    const computedGrid = itemsToUse.map(child => {
       const col = randomizeColumns
         ? Math.floor(Math.random() * columns)
         : colHeights.indexOf(Math.min(...colHeights));
@@ -162,7 +166,9 @@ const Masonry: React.FC<MasonryProps> = ({
       colHeights[col] += height + gap;
       return { ...child, x, y, w: columnWidth, h: height };
     });
-  }, [columns, items, width, randomizeOrder, randomizeColumns]);
+
+    return { grid: computedGrid, maxHeight: Math.max(...colHeights) - gap };
+  }, [columns, items, width, randomizeOrder, randomizeColumns, isMobile]);
 
   const hasMounted = useRef(false);
 
@@ -237,7 +243,7 @@ const Masonry: React.FC<MasonryProps> = ({
   };
 
   return (
-    <div ref={containerRef} className="relative w-full h-full">
+    <div ref={containerRef} className="relative w-full transition-[height] duration-500 ease-out" style={{ height: maxHeight || 100 }}>
       {grid.map(item => (
         <div
           key={item.id}
@@ -253,7 +259,7 @@ const Masonry: React.FC<MasonryProps> = ({
             style={{ backgroundImage: `url(${item.img})` }}
           >
             {colorShiftOnHover && (
-              <div className="color-overlay absolute inset-0 rounded-[10px] bg-gradient-to-br from-pink-500/50 to-sky-500/50 opacity-0 pointer-events-none" />
+              <div className="color-overlay absolute inset-0 rounded-[10px] bg-linear-to-br from-pink-500/50 to-sky-500/50 opacity-0 pointer-events-none" />
             )}
           </div>
         </div>
@@ -329,12 +335,42 @@ const imageItems: Item[] = [
     url: 'https://www.instagram.com/institutoreciclamais/',
     height: 410
   },
+  {
+    id: '11',
+    img: '/assets/images/06.jpg',
+    url: 'https://www.instagram.com/institutoreciclamais/',
+    height: 504
+  },
+  {
+    id: '12',
+    img: '/assets/images/18.jpg',
+    url: 'https://www.instagram.com/institutoreciclamais/',
+    height: 464
+  },
+  {
+    id: '13',
+    img: '/assets/images/03.jpg',
+    url: 'https://www.instagram.com/institutoreciclamais/',
+    height: 424
+  },
+  {
+    id: '14',
+    img: '/assets/images/09.jpg',
+    url: 'https://www.instagram.com/institutoreciclamais/',
+    height: 294
+  },
+  {
+    id: '15',
+    img: '/assets/images/04.jpg',
+    url: 'https://www.instagram.com/institutoreciclamais/',
+    height: 294
+  }
 ];
 
 const ImageShuffle = () => {
   return (
-    <div className="absolute bottom-0 left-1/2 h-80 w-[calc(100vw-56px)] max-w-[1100px] -translate-x-1/2 overflow-hidden rounded-t-xl bg-gradient-to-b from-zinc-900 to-transparent p-0.5">
-      <div className="relative z-0 h-full w-full overflow-hidden rounded-t-lg bg-white p-2">
+    <div className="w-full overflow-hidden rounded-xl p-0.5 mt-6 sm:mt-8">
+      <div className="relative z-0 w-full overflow-hidden rounded-lg bg-limpeza p-2">
         <Masonry
           items={imageItems}
           animateFrom="bottom"

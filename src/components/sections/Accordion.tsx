@@ -2,6 +2,7 @@ import React, { useId, useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import type { FAQQuestion } from "@/constants/faqQuestions";
 import { faqQuestions } from "@/constants/faqQuestions";
+import { SectionDivider } from "./SectionDivider";
 import "../../styles/accordion.css"; // point to your single source-of-truth CSS
 
 type AccordionProps = FAQQuestion;
@@ -79,20 +80,23 @@ export function AccordionItem({ title, answer, defaultOpen = false }: AccordionP
 
 const AccordionList = () => {
   return (
-    <div className="py-12 bg-limpeza">
-      <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-380">
-        <h3 className="mb-4 text-center text-5xl font-semibold text-mata-900">
+    <div className="relative pt-12 pb-36 md:pb-48 lg:pb-56 bg-limpeza">
+      <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-380 relative z-10">
+        <h3 className="mb-6 text-center text-5xl font-semibold text-mata-900">
           Perguntas Frequentes
         </h3>
-        {faqQuestions.map((question, index) => (
-          <AccordionItem
-            key={index}
-            title={question.title}
-            answer={question.answer}
-            defaultOpen={question.defaultOpen}
-          />
-        ))}
+        <div className="px-2 md:px-4 lg:px-10 xl:px-18 2xl:px-24">
+          {faqQuestions.map((question, index) => (
+            <AccordionItem
+              key={index}
+              title={question.title}
+              answer={question.answer}
+              defaultOpen={question.defaultOpen}
+            />
+          ))}
+        </div>
       </div>
+      <SectionDivider type="curve" position="bottom" fill="fill-mata-950" />
     </div>
   );
 };

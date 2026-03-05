@@ -38,8 +38,8 @@ const Typewrite = ({ examples }: { examples: string[] }) => {
   }, [examples.length]);
 
   return (
-    <p className="mb-2.5 text-sm font-light uppercase">
-      <span className="inline-block size-2 bg-gray-800" />
+    <p className="mb-2.5 text-sm font-light uppercase text-white/90">
+      <span className="inline-block size-2 bg-white" />
       <span className="ml-3">
         EXEMPLO:{" "}
         {examples[exampleIndex].split("").map((l, i) => (
@@ -85,7 +85,7 @@ const Typewrite = ({ examples }: { examples: string[] }) => {
                 duration: BOX_FADE_DURATION,
                 ease: "easeInOut",
               }}
-              className="absolute bottom-[3px] left-px right-0 top-[3px] bg-gray-800"
+              className="absolute bottom-[3px] left-px right-0 top-[3px] bg-white"
             />
           </motion.span>
         ))}
@@ -104,22 +104,22 @@ const BlockInTextCard = ({
   examples: string[];
 }) => {
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-6 text-white">
       <div>
-        <p className="mb-1.5 text-sm font-light uppercase text-gray-400">{tag}</p>
-        <hr className="border-gray-300" />
+        <p className="mb-1.5 text-sm font-light uppercase text-mata-300/80">{tag}</p>
+        <hr className="border-mata-800" />
       </div>
-      <p className="max-w-lg text-sm sm:text-base leading-relaxed text-gray-700">{text}</p>
+      <p className="max-w-lg text-sm sm:text-base leading-relaxed text-white/80">{text}</p>
       <div>
         <Typewrite examples={examples} />
-        <hr className="border-gray-300" />
+        <hr className="border-mata-800" />
       </div>
-      <div className="w-full rounded-full bg-zinc-600">
+      <div className="w-full rounded-full bg-mata-800">
         <a
           href={getRandomWhatsAppUrl()}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex w-full origin-top-left items-center justify-center rounded-full border border-zinc-900 bg-white p-0.5 text-sm transition-transform hover:-rotate-2"
+          className="flex w-full origin-top-left items-center justify-center rounded-full border border-mata-700 bg-mata-600 p-0.5 text-sm text-white transition-transform hover:-rotate-2 hover:bg-mata-500"
         >
           <span className="ml-1.5 mr-1 inline-block">
             Entre em Contato
@@ -208,8 +208,8 @@ const Footer = () => {
 
 
   return (
-    <footer className="py-8 sm:py-10 lg:py-16 bg-limpeza">
-      <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-380">
+    <footer className="relative pt-16 pb-8 sm:pt-20 sm:pb-10 lg:pt-28 lg:pb-16 bg-mata-950 text-white">
+      <div className="relative z-20 px-4 mx-auto sm:px-6 lg:px-8 max-w-380">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-y-8 sm:gap-y-12 md:gap-y-16 gap-x-8 sm:gap-x-12">
           {/* Logo and Description */}
           <div className="col-span-2 md:col-span-3 lg:col-span-2 lg:pr-8">
@@ -218,26 +218,40 @@ const Footer = () => {
               onClick={(e) => handleScrollToTop(e, "/")}
               className="inline-block"
             >
-              <div className="h-12 sm:h-16 relative inline-block">
+              <div className="h-12 sm:h-16 relative inline-flex">
                 <img
-                  src="/assets/logo/main.png"
+                  src="/assets/logo/mainlogo.png"
                   alt="Instituto Recicla Mais"
                   className="h-12 sm:h-16 w-auto opacity-0"
                   aria-hidden="true"
                 />
+                {/* Text Part (White) */}
                 <div
                   className="absolute inset-0"
                   style={{
-                    backgroundColor: 'var(--color-mata-900)',
-                    WebkitMask: 'url(/assets/logo/main.png) no-repeat center / contain',
+                    backgroundColor: 'white',
+                    WebkitMask: 'url(/assets/logo/mainlogo.png) no-repeat center / contain',
                     WebkitMaskSize: 'contain',
-                    mask: 'url(/assets/logo/main.png) no-repeat center / contain',
+                    mask: 'url(/assets/logo/mainlogo.png) no-repeat center / contain',
                     maskSize: 'contain',
+                    clipPath: 'polygon(0 0, 82% 0, 82% 100%, 0 100%)',
+                  }}
+                />
+                {/* Icon Part (Green) */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundColor: 'var(--color-mata-400)',
+                    WebkitMask: 'url(/assets/logo/mainlogo.png) no-repeat center / contain',
+                    WebkitMaskSize: 'contain',
+                    mask: 'url(/assets/logo/mainlogo.png) no-repeat center / contain',
+                    maskSize: 'contain',
+                    clipPath: 'polygon(82% 0, 100% 0, 100% 100%, 82% 100%)',
                   }}
                 />
               </div>
             </Link>
-            <p className="text-sm sm:text-base leading-relaxed text-gray-600 mt-4 sm:mt-7">
+            <p className="text-sm sm:text-base leading-relaxed text-white/70 mt-4 sm:mt-7">
               Juntos, construímos soluções que fortalecem a reciclagem e transformam realidades.
             </p>
 
@@ -250,7 +264,7 @@ const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Visite nosso ${social.name}`}
-                    className="flex items-center justify-center text-gray-800 transition-all duration-200 hover:text-mata-600 focus:text-mata-600 focus:outline-none focus:ring-2 focus:ring-mata-600 focus:ring-offset-2"
+                    className="flex items-center justify-center text-white transition-all duration-200 hover:text-mata-300 focus:text-mata-300 focus:outline-none focus:ring-2 focus:ring-mata-300 focus:ring-offset-2 focus:ring-offset-mata-950"
                   >
                     {social.icon}
                   </a>
@@ -262,14 +276,14 @@ const Footer = () => {
           {/* Footer Sections */}
           {footerSections.map((section) => (
             <div key={section.title}>
-              <p className="text-xs sm:text-sm font-semibold tracking-widest text-gray-400 uppercase">{section.title}</p>
+              <p className="text-xs sm:text-sm font-semibold tracking-widest text-mata-300/80 uppercase">{section.title}</p>
               <ul className="mt-6 space-y-4" role="list">
                 {section.links.map((link) => (
                   <li key={link.path}>
                     <Link
                       to={link.path}
                       onClick={(e) => handleScrollToTop(e, link.path)}
-                      className="flex text-base text-black transition-all duration-200 hover:text-mata-600 focus:text-mata-600 focus:outline-none"
+                      className="flex text-base text-white/90 transition-all duration-200 hover:text-mata-300 focus:text-mata-300 focus:outline-none"
                     >
                       {link.label}
                     </Link>
@@ -300,29 +314,41 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <hr className="mt-8 sm:mt-12 md:mt-16 mb-6 sm:mb-8 md:mb-10 border-gray-200" />
+        <hr className="mt-8 sm:mt-12 md:mt-16 mb-6 sm:mb-8 md:mb-10 border-mata-800" />
         <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
           <Link
             to="/"
             onClick={(e) => handleScrollToTop(e, "/")}
             className="cursor-pointer transition-opacity hover:opacity-80"
           >
-            <img
-              src="/assets/logo/small-logo.png"
-              alt="Instituto Recicla Mais"
-              className="h-6 sm:h-8 w-auto"
-            />
+            <div className="h-6 sm:h-8 relative inline-block">
+              <img
+                src="/assets/logo/small-logo.png"
+                alt="Instituto Recicla Mais"
+                className="h-6 sm:h-8 w-auto opacity-0"
+              />
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundColor: 'white',
+                  WebkitMask: 'url(/assets/logo/small-logo.png) no-repeat center / contain',
+                  WebkitMaskSize: 'contain',
+                  mask: 'url(/assets/logo/small-logo.png) no-repeat center / contain',
+                  maskSize: 'contain',
+                }}
+              />
+            </div>
           </Link>
-          <p className="flex-1 text-xs sm:text-sm text-center text-gray-600">
+          <p className="flex-1 text-xs sm:text-sm text-center text-white/60">
             © {currentYear} Instituto Recicla Mais. Todos os direitos reservados.
           </p>
-          <p className="text-xs sm:text-sm text-gray-600">
+          <p className="text-xs sm:text-sm text-white/60">
             Desenvolvido por{" "}
             <a
               href="https://mateusloubach.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-mata-600 hover:text-mata-700 underline transition-colors"
+              className="text-mata-300 hover:text-white underline transition-colors"
             >
               Mateus Loubach
             </a>

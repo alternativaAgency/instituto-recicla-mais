@@ -1,56 +1,74 @@
 import { getRandomWhatsAppUrl } from "@/utils/whatsapp";
+import { SectionDivider } from "./SectionDivider";
 
 const Hero = () => {
-
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-2 sm:px-4 pt-2 sm:pt-4 md:pt-8 lg:pt-10 pb-4 sm:pb-8 md:pb-16 lg:pb-20">
-      <div className="mx-auto w-full max-w-7xl text-center">
-        {/* Logo */}
-        <div className="">
-          <div className="inline-block">
-            <div className="h-24 sm:h-32 md:h-40 lg:h-48 xl:h-64 relative inline-block">
-              <img
-                src="/assets/logo/small-logo.png"
-                alt="Instituto Recicla Mais"
-                className="h-24 sm:h-32 md:h-40 lg:h-48 xl:h-64 w-auto opacity-0"
-                aria-hidden="true"
-              />
-              <div
-                className="absolute inset-0"
-                style={{
-                  backgroundColor: "white",
-                  WebkitMask:
-                    "url(/assets/logo/small-logo.png) no-repeat center / contain",
-                  WebkitMaskSize: "contain",
-                  mask: "url(/assets/logo/small-logo.png) no-repeat center / contain",
-                  maskSize: "contain",
-                }}
-              />
+    <section className="relative h-screen w-full overflow-hidden">
+      {/* Mobile Background - 95vw width with adjusted clip path */}
+      <div
+        className="absolute inset-y-0 left-0 w-[92vw] bg-mata-950 z-10 lg:hidden"
+        style={{
+          clipPath: 'polygon(0% 0%, 100% 0%, 100% 32%, calc(100% - 20vw) 32%, calc(100% - 20vw) 62%, 100% 62%, 100% 100%, 0% 100%)'
+        }}
+      />
+
+      {/* Desktop Background - 57vw width with clip path */}
+      <div
+        className="absolute inset-y-0 left-0 w-[57vw] bg-mata-950 z-10 hidden lg:block"
+        style={{
+          clipPath: 'polygon(0% 0%, 100% 0%, 100% 32%, calc(100% - 38vh) 32%, calc(100% - 38vh) 62%, 100% 62%, 100% 100%, 0% 100%)'
+        }}
+      />
+      <div className="absolute left-[64%] -translate-x-1/2 top-1/2 -translate-y-1/2 h-[135%] z-0 pointer-events-none flex items-center justify-center">
+        <div
+          className="h-full aspect-square bg-mata-300 opacity-30"
+          style={{
+            maskImage: 'url("/assets/logo/big-logo.png")',
+            maskSize: 'contain',
+            maskRepeat: 'no-repeat',
+            maskPosition: 'center',
+            WebkitMaskImage: 'url("/assets/logo/big-logo.png")',
+            WebkitMaskSize: 'contain',
+            WebkitMaskRepeat: 'no-repeat',
+            WebkitMaskPosition: 'center'
+          }}
+        />
+      </div>
+      <div className="relative z-20 grid h-full w-full grid-cols-1 lg:grid-cols-[62%_1fr] pointer-events-none">
+        <div className="flex flex-col justify-start pt-12 px-6 sm:justify-center sm:pt-0 sm:px-12 pointer-events-auto">
+          <div className="max-w-[65%] sm:max-w-2xl pr-0 sm:pr-12 lg:pr-32">
+            <h2 className="mb-4 font-family-primary text-3xl font-normal leading-tight text-white drop-shadow-sm sm:text-3xl md:text-4xl lg:text-[46px]">
+              Transformamos iniciativas de reciclagem em projetos aptos a captar recursos via Lei de Incentivo a Reciclagem
+            </h2>
+
+            <p className="mb-6 sm:mb-10 font-object-sans text-lg sm:text-xl font-light italic leading-relaxed tracking-wide text-gray-200">
+              Elaboração, gestão e acompanhamento técnico para cooperativas,
+              associações de catadores e empresas de reciclagem.
+            </p>
+
+            <div className="flex flex-col items-start gap-4 sm:flex-row">
+              <a
+                href={getRandomWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative block w-48 sm:w-60 aspect-884/418 transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 drop-shadow-md"
+              >
+                <img
+                  src="/assets/saibamais.svg?v=4"
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-contain transition-all duration-300 group-hover:brightness-110"
+                />
+                <span className="absolute z-10 font-family-primary text-lg sm:text-2xl font-bold text-mata-950 left-[65%] top-[58%] -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
+                  SAIBA +
+                </span>
+              </a>
             </div>
           </div>
         </div>
+        <div className="hidden lg:block"></div>
 
-        <h2 className="mb-6 sm:mb-8 md:mb-10 lg:mb-12 text-3xl sm:text-xl md:text-2xl lg:text-5xl xl:text-6xl font-medium leading-tight text-limpeza">
-          Transformamos iniciativas de reciclagem em projetos aptos a captar
-          recursos via Lei de Incentivo a Reciclagem
-        </h2>
-
-        <p className="mx-auto mb-8 sm:mb-10 md:mb-12 lg:mb-14 max-w-6xl text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-limpeza">
-          Elaboração, gestão e acompanhamento técnico para cooperativas,
-          associações de catadores e empresas de reciclagem.
-        </p>
-
-        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a
-            href={getRandomWhatsAppUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-2 rounded-full bg-mata-600 px-6 py-3 text-white transition-all duration-300 ease-in-out hover:bg-mata-700 active:bg-mata-800"
-          >
-            <span className="font-medium">Saiba como participar</span>
-          </a>
-        </div>
       </div>
+      <SectionDivider type="waves" position="bottom" fill="fill-mata-950" />
     </section>
   );
 };

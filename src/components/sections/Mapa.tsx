@@ -6,35 +6,13 @@ import Map, {
   Layer
 } from 'react-map-gl/maplibre';
 import "maplibre-gl/dist/maplibre-gl.css";
-
-interface CityData {
-  id: number;
-  cityName: string;
-  longitude: number;
-  latitude: number;
-  jobsDone: number;
-  trashRecycledKg: number;
-}
-
-const cities: CityData[] = [
-  { id: 1, cityName: "Belo Horizonte", longitude: -43.9378, latitude: -19.9167, jobsDone: 245, trashRecycledKg: 125000 },
-  { id: 2, cityName: "São Paulo", longitude: -46.6333, latitude: -23.5505, jobsDone: 512, trashRecycledKg: 285000 },
-  { id: 3, cityName: "Rio de Janeiro", longitude: -43.1729, latitude: -22.9068, jobsDone: 389, trashRecycledKg: 198000 },
-  { id: 4, cityName: "Vitória", longitude: -40.3128, latitude: -20.3155, jobsDone: 178, trashRecycledKg: 95000 },
-  { id: 5, cityName: "Brasília", longitude: -47.8825, latitude: -15.7942, jobsDone: 156, trashRecycledKg: 82000 },
-  { id: 6, cityName: "Boa Vista", longitude: -60.6719, latitude: 2.8197, jobsDone: 0, trashRecycledKg: 0 },
-  { id: 7, cityName: "Ji-Paraná", longitude: -61.9411, latitude: -10.8853, jobsDone: 0, trashRecycledKg: 0 },
-  { id: 8, cityName: "Brumado", longitude: -41.6653, latitude: -14.2036, jobsDone: 0, trashRecycledKg: 0 },
-  { id: 9, cityName: "Várzea Grande", longitude: -56.1322, latitude: -15.6467, jobsDone: 0, trashRecycledKg: 0 },
-  { id: 10, cityName: "Conselheiro Pena", longitude: -41.4722, latitude: -19.1789, jobsDone: 0, trashRecycledKg: 0 },
-  { id: 11, cityName: "Blumenau", longitude: -49.0661, latitude: -26.9194, jobsDone: 0, trashRecycledKg: 0 },
-  { id: 12, cityName: "Itapema", longitude: -48.6128, latitude: -27.0908, jobsDone: 0, trashRecycledKg: 0 },
-  { id: 13, cityName: "Juazeiro do Norte", longitude: -39.3153, latitude: -7.2131, jobsDone: 0, trashRecycledKg: 0 },
-  { id: 14, cityName: "Belém", longitude: -48.5044, latitude: -1.4558, jobsDone: 0, trashRecycledKg: 0 },
-];
+import { SectionDivider } from './SectionDivider';
+import { cities, type CityData } from '../../data/cities';
+import { useNavigate } from 'react-router-dom';
 
 export default function Mapa() {
   const [popupInfo, setPopupInfo] = React.useState<CityData | null>(cities[0]);
+  const navigate = useNavigate();
 
   // Auto-cycle tooltips effect
   React.useEffect(() => {
@@ -74,7 +52,8 @@ export default function Mapa() {
   };
 
   return (
-    <div className="w-full bg-mata-950 relative">
+    <div className="w-full bg-mata-950 relative pt-16 pb-16 md:pt-24 md:pb-24">
+      <SectionDivider type="waves" position="top" fill="fill-mata-950" />
       <div className="w-full px-6 sm:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-[40%_1fr] gap-12 items-stretch">
 
@@ -117,13 +96,17 @@ export default function Mapa() {
                   latitude={city.latitude}
                   anchor="bottom"
                   style={{ opacity: 0.8 }}
+                  onClick={e => {
+                    e.originalEvent.stopPropagation();
+                    navigate(`/${city.state}/${city.slug}`);
+                  }}
                 >
-                  <div className="group relative">
-                    <div className="absolute -inset-2 bg-mata-500/30 rounded-full blur-sm animate-pulse"></div>
+                  <div className="group relative cursor-pointer z-10">
+                    <div className="absolute -inset-2 bg-fluid/30 rounded-full blur-sm animate-pulse"></div>
                     <svg
                       height={24}
                       viewBox="0 0 24 24"
-                      className="fill-mata-500 drop-shadow-lg"
+                      className="fill-fluid drop-shadow-lg"
                       style={{
                         stroke: 'white',
                         strokeWidth: '1.5px',
@@ -141,19 +124,19 @@ export default function Mapa() {
           {/* Left Column - Content */}
           <div className="flex flex-col justify-center relative py-16 lg:py-24 z-30">
             <div className="mb-6 inline-block w-fit group">
-              <span className="chip bg-linear-to-r from-mata-400 to-mata-500 text-white text-lg font-semibold shadow-lg shadow-mata-500/20 group-hover:scale-105">
+              <span className="chip bg-fluid text-mata-950 text-lg font-semibold shadow-lg shadow-fluid/20 group-hover:scale-105 uppercase">
                 Faça a Diferença
               </span>
             </div>
 
             <h2 className="mb-6 text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold leading-tight">
-              <span className="text-white block mb-2">Nossos</span>
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-mata-300 via-mata-400 to-mata-500 block">
+              <span className="text-limpeza block mb-2">Nossos</span>
+              <span className="text-fluid block">
                 Trabalhos
               </span>
             </h2>
 
-            <p className="text-xl md:text-2xl leading-relaxed text-white/90 mb-8 max-w-lg">
+            <p className="text-xl md:text-2xl leading-relaxed text-limpeza/90 mb-8 max-w-lg">
               Estamos presentes em diversas cidades brasileiras, apoiando
               cooperativas, associações de catadores e empresas na elaboração de
               projetos que transformam resíduos em renda, dignidade e
@@ -163,21 +146,22 @@ export default function Mapa() {
             {/* Stats or additional info */}
             <div className="flex flex-wrap gap-6 mt-4">
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-mata-400 animate-pulse"></div>
-                <span className="text-lg text-white/70 font-medium">
+                <div className="w-2 h-2 rounded-full bg-fluid animate-pulse"></div>
+                <span className="text-lg text-limpeza/70 font-medium">
                   Impacto Real
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <div
-                  className="w-2 h-2 rounded-full bg-mata-400 animate-pulse"
+                  className="w-2 h-2 rounded-full bg-fluid animate-pulse"
                   style={{ animationDelay: "0.5s" }}
                 ></div>
-                <span className="text-lg text-white/70 font-medium">
+                <span className="text-lg text-limpeza/70 font-medium">
                   Sustentabilidade
                 </span>
               </div>
             </div>
+
           </div>
 
           {/* Right Column - Map (Desktop Only) */}
@@ -215,16 +199,19 @@ export default function Mapa() {
                     anchor="bottom"
                     onClick={e => {
                       e.originalEvent.stopPropagation();
-                      setPopupInfo(city);
+                      navigate(`/${city.state}/${city.slug}`);
                     }}
                     style={{ cursor: 'pointer', zIndex: isActive ? 50 : 1 }}
                   >
-                    <div className={`group relative cursor-pointer ${isActive ? 'z-10' : 'hover:z-10'}`}>
-                      <div className={`absolute -inset-2 bg-mata-500/30 rounded-full blur-sm transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}></div>
+                    <div
+                      className={`group relative cursor-pointer ${isActive ? 'z-10' : 'hover:z-10'}`}
+                      onMouseEnter={() => setPopupInfo(city)}
+                    >
+                      <div className={`absolute -inset-2 bg-fluid/30 rounded-full blur-sm transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}></div>
                       <svg
                         height={24}
                         viewBox="0 0 24 24"
-                        className={`fill-mata-500 drop-shadow-lg transform transition-transform duration-300 ${isActive ? '-translate-y-1' : 'group-hover:-translate-y-1'}`}
+                        className={`fill-fluid drop-shadow-lg transform transition-transform duration-300 ${isActive ? '-translate-y-1' : 'group-hover:-translate-y-1'}`}
                         style={{
                           stroke: 'white',
                           strokeWidth: '1.5px',
@@ -248,25 +235,8 @@ export default function Mapa() {
                   className="custom-popup z-50"
                   maxWidth="300px"
                 >
-                  <div className="bg-mata-900 text-white p-2 rounded-lg shadow-xl border border-mata-700 font-sans min-w-[140px]">
-                    <div className="mb-1">
-                      <h3 className="font-bold text-sm text-white">{popupInfo.cityName}</h3>
-                    </div>
-
-                    <div className="space-y-0.5">
-                      <div className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-mata-400"></div>
-                        <span className="text-xs text-gray-300">Jobs:</span>
-                        <span className="text-xs font-semibold text-white ml-auto">{popupInfo.jobsDone}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-mata-400"></div>
-                        <span className="text-xs text-gray-300">Reciclado:</span>
-                        <span className="text-xs font-semibold text-white ml-auto">
-                          {(popupInfo.trashRecycledKg / 1000).toFixed(1)}t
-                        </span>
-                      </div>
-                    </div>
+                  <div className="bg-sustentabilidade text-mata-950 px-4 py-2 rounded-lg shadow-xl font-sans text-center">
+                    <h3 className="font-bold text-sm">{popupInfo.cityName}</h3>
                   </div>
                 </Popup>
               )}

@@ -8,7 +8,7 @@ const BasicFAQ = () => {
     if (typeof answer !== "string" && !Array.isArray(answer)) {
       return answer;
     }
-    
+
     // If it's an array of strings, render each as a paragraph
     if (Array.isArray(answer)) {
       return (
@@ -21,7 +21,7 @@ const BasicFAQ = () => {
         </>
       );
     }
-    
+
     // If it's a string, render as a single paragraph (backward compatible)
     return <p>{answer}</p>;
   };
@@ -66,16 +66,15 @@ const Question = ({
       <button
         onClick={handleToggle}
         className="flex w-full items-center justify-between gap-4 py-6 outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus:ring-0 border-none focus:border-none active:bg-mata-100/50 active:opacity-90 transition-colors duration-150 min-h-[44px]"
-        style={{ 
+        style={{
           WebkitTapHighlightColor: "transparent",
         } as React.CSSProperties}
       >
         <span
-          className={`text-left text-xl sm:text-2xl font-semibold transition-colors duration-150 ${
-            open
+          className={`text-left text-xl sm:text-2xl font-semibold transition-colors duration-150 ${open
               ? "text-mata-900"
               : "bg-linear-to-r from-mata-600 to-mata-500 bg-clip-text text-transparent"
-          }`}
+            }`}
           style={{
             fontFamily: "'Geom', system-ui, -apple-system, sans-serif",
             WebkitBackgroundClip: open ? "unset" : "text",
@@ -85,17 +84,15 @@ const Question = ({
           {title}
         </span>
         <span
-          className={`text-2xl transition-all duration-250 ease-out ${
-            open ? "text-mata-600 rotate-180" : "text-mata-700 rotate-0"
-          }`}
+          className={`text-2xl transition-all duration-250 ease-out ${open ? "text-mata-600 rotate-180" : "text-mata-700 rotate-0"
+            }`}
         >
           <FiChevronDown />
         </span>
       </button>
       <div
-        className={`overflow-hidden ${
-          open ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
-        }`}
+        className={`overflow-hidden ${open ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+          }`}
         style={{
           transition: "max-height 250ms cubic-bezier(0.4, 0, 0.2, 1), opacity 200ms ease-out",
         }}

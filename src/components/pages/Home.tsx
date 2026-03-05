@@ -1,10 +1,10 @@
-import { Accordion, Footer, Hero1, Mapa, Mission } from "../sections"
+import { Accordion, Footer, Hero, Mapa, Mission } from "../sections"
 
 const Home = () => {
   return (
     <>
-      {/* <Hero /> */}
-      <Hero1 />
+      {/* <TestHero /> */}
+      <Hero />
       <Mapa />
       <Mission />
       <Accordion />
